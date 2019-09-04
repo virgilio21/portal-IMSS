@@ -17,4 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function(){
+
+    Route::get('/survey', 'SurveysController@home');
+    Route::post('/survey/create', 'SurveysController@create');
+
+
+});
+
+
+
+

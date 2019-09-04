@@ -14,7 +14,16 @@ class EditUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+
+            //apellidos
+            $table->string('surnames');
+            //Direccion de casa
+            $table->string('address');
+            //Telefono
+            $table->string('phone');
+            //Matricula del alumno o maestro
+            $table->string('enrollment');
+
         });
     }
 
@@ -26,7 +35,12 @@ class EditUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+
             //
+            $table->dropColumn('surnames');
+            $table->dropColumn('addres');
+            $table->dropColumn('phone');
+            $table->dropColumn('enrollment');
         });
     }
 }

@@ -25,8 +25,7 @@ class SurveysController extends Controller
         Survey::create([
             
             'name' => $request->input('nameSurvey'),
-            //Hay que guardar la imagen en algun lugar en este caso en una carpetas messages dentro de storage public, para eso se usa el comando php artisan storage:link para vincular la carpeta storage public a la carptea public, es un link sombolico :D.
-            //Nos devuelve un nombre al azar para emitar nombres repetidos.
+          
             
         ]);
  

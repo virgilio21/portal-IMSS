@@ -38,7 +38,7 @@ class EditUsersTable extends Migration
 
             //
             $table->dropColumn('surnames');
-            $table->dropColumn('addres');
+            $table->dropColumn('address');
             $table->dropColumn('phone');
             $table->dropColumn('enrollment');
         });

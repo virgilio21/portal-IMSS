@@ -39,7 +39,7 @@
         <div class="col-12">
                 @foreach ($survey->sections as $section)
                 <h2 class="card-text">
-                    <a href="#" class="mb-4" data-toggle="modal" data-target="#create">{{$section->name}}</a>
+                    <a href="#" class="mb-4" data-toggle="modal" data-target="#create" id="nameValue" onclick="recibirSection();">{{$section->name}}</a>
                 </h2>
                 <div class="text-muted card-text">
                     {{$section->created_at}}
@@ -48,7 +48,18 @@
             
         </div>
     </div>
-    @include('layouts.question') 
+     
+
+    <script>
+
+    function recibirSection(){
+        var nombreSection = document.getElementById('nameValue').innerHTML;
+        document.getElementById('sectionName').value = nombreSection;
+    }
+     
+        
+    </script>
+    @include('layouts.question')
     
     
 @endsection

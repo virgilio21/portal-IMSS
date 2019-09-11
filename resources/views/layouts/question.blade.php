@@ -19,12 +19,14 @@
                                     
                                         {{ csrf_field() }}
                                     <input id="question" type="text" class="form-control" name="question" value="{{ old('question') }}" required autocomplete="question" autofocus>
+
+                                    <input id="sectionName" type="text" class="form-control" name="sectionName" value="{{ old('sectionName') }}" required autocomplete="sectionName" autofocus>
                                     
     
-                                    @if( $errors->has('question'))
+                                    @if( $errors->has('sectionName'))
 
                                         
-                                        @foreach ($errors->get('question') as $error)
+                                        @foreach ($errors->get('sectionName') as $error)
                                             <div class="form-control-feedback" >{{$error}}</div>
                                         @endforeach
                                     @endif

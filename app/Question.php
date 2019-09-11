@@ -8,4 +8,10 @@ class Question extends Model
 {
     //
     protected $guarded = [];
+
+
+    public function section(){
+
+        return $this->belongsTo(Section::class);
+    }
 }

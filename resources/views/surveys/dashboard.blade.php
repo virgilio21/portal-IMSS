@@ -14,7 +14,7 @@
                 <div class="form-group">
                 
                     {{ csrf_field() }}
-                    <input class="form-control" type="text" name="nameSurvey" placeholder="¿Cual es el nombre de tu nueva escuesta?" value='{{ old('name') }}' required autocomplete="name" />
+                    <input class="form-control" type="text" name="nameSurvey" placeholder="¿Cual es el nombre de tu nueva escuesta?" value='{{ old('nameSurvey') }}' required autocomplete="name" />
 
                     @if( $errors->has('nameSurvey'))
 
@@ -42,12 +42,13 @@
                 <div class="col-6">
                     
                  
-                       
-                        <p class="card-text">{{$survey->name}} 
-                        </p>
+                    <div class="alert alert-primary" role="alert">
+                        <a href="/survey/{{$survey->id}}" class="alert-link">{{$survey->name}} 
+                        </a>
                         <div class="text-muted card-text">
                             {{$survey->created_at}}
                         </div>
+                    </div>
                     
     
                 </div>

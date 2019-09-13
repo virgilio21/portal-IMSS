@@ -24,7 +24,7 @@ class CreateQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'question' => ['required','max:100'],
+            'question' => ['required','max:150'],
         ];
     }
 
@@ -32,7 +32,7 @@ class CreateQuestionRequest extends FormRequest
 
         return [
             'question.required'=> 'Este campo no puede estar vacio',
-            'question.max'=> 'La pregunta no puede ser mayor a 100 caracteres',
+            'question.max'=> 'La pregunta no puede ser mayor a 150 caracteres',
         ];
 
     }

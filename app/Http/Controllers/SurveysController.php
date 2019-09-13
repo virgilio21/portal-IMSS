@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use App\Http\Requests\CreateQuestionRequest;
 use App\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateSurveyRequest;
 use App\Http\Requests\CreateSectionRequest;
+use App\Http\Requests\CreateAnswerRequest;
 use App\Question;
 use App\Section;
 
@@ -73,6 +75,20 @@ class SurveysController extends Controller
             'question' => $request->input('question'),
             'section_id' => $request->input('sectionName'),
             
+        ]);
+
+        return redirect('/survey/'.$survey->id);
+
+        
+    }
+
+    public function createAnswer(createAnswerRequest $request){
+
+        $survey = session('survey');
+
+        Answer::create([
+            'answer' => $request->input('answer'),
+            'question_id' => $request->input('questionName'),
         ]);
 
         return redirect('/survey/'.$survey->id);

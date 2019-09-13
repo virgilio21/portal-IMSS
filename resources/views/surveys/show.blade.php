@@ -3,7 +3,8 @@
 
 
 @section('content')
- 
+    
+    
     <h1>{{$survey->name}}</h1>
 
     <div class="row">
@@ -41,15 +42,19 @@
         <div class="col-12">
                 @foreach ($survey->sections as $section)
                     <h2 class="card-text">
-                    <a href="#" class="mb-4" data-toggle="modal" data-target="#create" id="nameValue" onclick="recibirValue( 'sectionName','{{$section->id}}' );">{{$section->name}}</a>
+                        <a href="#" class="mb-4" data-toggle="modal" data-target="#create" onclick="recibirValue( 'sectionName','{{$section->id}}' );">{{$section->name}}</a>
                     </h2>
                     <div class="text-muted card-text">
                         {{$section->created_at}}
                     </div>
 
-                    @foreach ($section->questions as $preguntas)
+                    @foreach ($section->questions as $pregunta)
 
-                        <p>{{$loop->iteration}}. {{$preguntas->question}}</p>
+                        <p>
+                            <a href="#" class="mb-4 black" data-toggle="modal" data-target="#createAnswer" onclick="recibirValue('questionName', '{{$pregunta->id}}')">
+                            {{$loop->iteration}}. {{$pregunta->question}}
+                            </a>
+                        </p>
                     @endforeach
 
                 @endforeach
@@ -58,20 +63,11 @@
     </div>
      
 
+    
+    @include('layouts.question')
+    @include('layouts.answer')
     <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>
 
-    
-
-
-
-<script>
-$(document).ready(function(){
-  alert('Hola');
-});
-</script>
-
-
-    @include('layouts.question')
     
 @endsection
 

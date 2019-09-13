@@ -17,7 +17,9 @@
                 <div class="form-group">
                 
                     {{ csrf_field() }}
-                    <input class="form-control" type="text" name="nameSection" placeholder="¿Cual es el nombre de tu nueva sección?" value='{{ old('nameSection') }}' required autocomplete="nameSection" />
+                    <input class="form-control" type="text" name="nameSection" placeholder="¿Cual es el nombre de tu nueva sección?" value='{{ old('nameSection') }}' required autocomplete="nameSection"  />
+
+                    
 
                     @if( $errors->has('nameSection'))
 
@@ -38,29 +40,38 @@
     <div class="row">
         <div class="col-12">
                 @foreach ($survey->sections as $section)
-                <h2 class="card-text">
-                    <a href="#" class="mb-4" data-toggle="modal" data-target="#create" id="nameValue" onclick="recibirSection();">{{$section->name}}</a>
-                </h2>
-                <div class="text-muted card-text">
-                    {{$section->created_at}}
-                </div>
+                    <h2 class="card-text">
+                    <a href="#" class="mb-4" data-toggle="modal" data-target="#create" id="nameValue" onclick="recibirValue( 'sectionName','{{$section->id}}' );">{{$section->name}}</a>
+                    </h2>
+                    <div class="text-muted card-text">
+                        {{$section->created_at}}
+                    </div>
+
+                    @foreach ($section->questions as $preguntas)
+
+                        <p>{{$loop->iteration}}. {{$preguntas->question}}</p>
+                    @endforeach
+
                 @endforeach
             
         </div>
     </div>
      
 
-    <script>
+    <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>
 
-    function recibirSection(){
-        var nombreSection = document.getElementById('nameValue').innerHTML;
-        document.getElementById('sectionName').value = nombreSection;
-    }
-     
-        
-    </script>
-    @include('layouts.question')
     
+
+
+
+<script>
+$(document).ready(function(){
+  alert('Hola');
+});
+</script>
+
+
+    @include('layouts.question')
     
 @endsection
 

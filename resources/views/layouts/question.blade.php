@@ -18,18 +18,21 @@
                                 <div class="col-md-12 mt-4">
                                     
                                         {{ csrf_field() }}
-                                    <input id="question" type="text" class="form-control" name="question" value="{{ old('question') }}" required autocomplete="question" autofocus>
+                                    <input id="question" type="text" class="form-control" name="question" value="{{ old('question') }}" required autocomplete="question" >
 
-                                    <input id="sectionName" type="text" class="form-control" name="sectionName" value="{{ old('sectionName') }}" required autocomplete="sectionName" autofocus>
-                                    
-    
-                                    @if( $errors->has('sectionName'))
+                                    @if( $errors->has('question'))
 
                                         
-                                        @foreach ($errors->get('sectionName') as $error)
+                                        @foreach ($errors->get('question') as $error)
                                             <div class="form-control-feedback" >{{$error}}</div>
                                         @endforeach
                                     @endif
+
+
+                                    <input id="sectionName" type="hidden" class="form-control" name="sectionName" required>
+                                    
+    
+                                    
                                     
                                     
                                 </div>
@@ -46,3 +49,9 @@
         </div>
     </div>   
 </form>
+
+
+
+
+
+

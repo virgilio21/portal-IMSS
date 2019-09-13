@@ -7,6 +7,7 @@ use App\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateSurveyRequest;
 use App\Http\Requests\CreateSectionRequest;
+use App\Question;
 use App\Section;
 
 class SurveysController extends Controller
@@ -65,6 +66,17 @@ class SurveysController extends Controller
 
     public function createQuestion(CreateQuestionRequest $request){
 
+        $survey = session('survey');
+
+        Question::create([
+
+            'question' => $request->input('question'),
+            'section_id' => $request->input('sectionName'),
+            
+        ]);
+
+        return redirect('/survey/'.$survey->id);
+
         
     }
 
@@ -75,4 +87,5 @@ class SurveysController extends Controller
         return $survey = Survey::where('id', $surveyId)->firstOrFail();
  
     }
+
 }

@@ -7,7 +7,7 @@
 
     <div class="row">
 
-        <div class="col-6">
+        <div class="col-4">
             <form action="/survey/create" method="POST">
                 
                 
@@ -15,6 +15,12 @@
                 
                     {{ csrf_field() }}
                     <input class="form-control" type="text" name="nameSurvey" placeholder="¿Cual es el nombre de tu nueva escuesta?" value='{{ old('nameSurvey') }}' required autocomplete="name" />
+                    <select name="access" id="access" class="form-control">
+                            <option value="alumnos" selected>alumnos</option>
+                            <option value="maestros">maestros</option>
+                            <option value="ambos">alumnos y maestros</option>
+                    </select>
+
 
                     @if( $errors->has('nameSurvey'))
 
@@ -23,8 +29,14 @@
                             <div class="form-control-feedback" >{{$error}}</div>    
                         @endforeach
                     @endif
-        
+                    <input type="submit" value="Crear">
                 </div>
+               
+                        
+                
+
+               
+                    
 
                
             

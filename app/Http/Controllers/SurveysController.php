@@ -32,6 +32,7 @@ class SurveysController extends Controller
         Survey::create([
             
             'name' => $request->input('nameSurvey'),
+            'access' => $request->input('access'),
           
             
         ]);
@@ -70,12 +71,42 @@ class SurveysController extends Controller
 
         $survey = session('survey');
 
-        Question::create([
+       $myQuestion =  Question::create([
 
             'question' => $request->input('question'),
             'section_id' => $request->input('sectionName'),
+            'typeQuestions' => $request->input('typeQuestion'),
             
         ]);
+
+        if( $myQuestion->typeQuestions == 'cerradaDefault' ){
+            
+            Answer::create([
+                'answer' => 'Muy satisfecho',
+                'question_id' => $myQuestion->id,
+            ]);
+
+            Answer::create([
+                'answer' => 'Satisfecho',
+                'question_id' => $myQuestion->id,
+            ]);
+
+            Answer::create([
+                'answer' => 'Ni satisfecho, ni insatisfecho',
+                'question_id' => $myQuestion->id,
+            ]);
+
+            Answer::create([
+                'answer' => 'Insatisfecho',
+                'question_id' => $myQuestion->id,
+            ]);
+
+            Answer::create([
+                'answer' => 'Muy insatisfecho',
+                'question_id' => $myQuestion->id,
+            ]);
+
+        }
 
         return redirect('/survey/'.$survey->id);
 
@@ -88,7 +119,7 @@ class SurveysController extends Controller
 
         Answer::create([
             'answer' => $request->input('answer'),
-            'question_id' => $request->input('questionName'),
+            'question_id' => $request->input('questionId'),
         ]);
 
         return redirect('/survey/'.$survey->id);

@@ -25,6 +25,7 @@ class CreateSurveyRequest extends FormRequest
     {
         return [
             'nameSurvey' => ['required','max:100'],
+            'access' => ['required', 'max:10'],
         ];
     }
 
@@ -33,6 +34,7 @@ class CreateSurveyRequest extends FormRequest
         return [
             'nameSurvey.required'=> 'Este campo no puede estar vacio',
             'nameSurvey.max'=> 'El nombre no puede ser mayor a 100 caracteres',
+            
         ];
 
     }

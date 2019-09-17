@@ -30,11 +30,28 @@
 
 
                                     <input id="sectionName" type="hidden" class="form-control" name="sectionName" required>
+
+                                    
                                     
     
                                     
                                     
                                     
+                                </div>
+                        </div>
+
+                        <div class="form-group row">
+                                    
+        
+                                <div class="col-md-12 mt-4">
+                                    
+                                        <select name="typeQuestion" id="typeQuestion" class="form-control">
+                                            <option value="cerradaDefault">Dejar que el sistema se encargue</option>
+                                            <option value="cerradaMasOtro">Quiero mis propias respuestas y un campo opcional</option>
+                                            <option value="cerradaPropia">Quiero mis propias respuestas</option>
+                                            <option value="abierta">Respuesta abierta</option>
+                                        </select>
+
                                 </div>
                         </div>
                 </div>

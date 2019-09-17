@@ -25,6 +25,7 @@ class CreateQuestionRequest extends FormRequest
     {
         return [
             'question' => ['required','max:150'],
+            'typeQuestion' => ['required', 'max:20']
         ];
     }
 

@@ -29,7 +29,7 @@
                                         @endif
     
     
-                                        <input id="questionName" type="hidden" class="form-control" name="questionName" required>
+                                        <input id="questionId" type="hidden" class="form-control" name="questionId" required>
                                         
         
                                         
@@ -37,6 +37,9 @@
                                         
                                     </div>
                             </div>
+
+                            
+
                     </div>
                     <div class="modal-footer">
                             <button type="submit" class="btn btn-outline-success">Guardar</button>

@@ -48,13 +48,35 @@
                         {{$section->created_at}}
                     </div>
 
-                    @foreach ($section->questions as $pregunta)
+                    @foreach ($section->questions as $question)
 
-                        <p>
-                            <a href="#" class="mb-4 black" data-toggle="modal" data-target="#createAnswer" onclick="recibirValue('questionName', '{{$pregunta->id}}')">
-                            {{$loop->iteration}}. {{$pregunta->question}}
-                            </a>
+                        <p class="question">
+
+                            @if( $question->typeQuestions == "cerradaDefault")
+                                {{$loop->iteration}}. {{$question->question}}
+                            @endif
+
+                            @if( $question->typeQuestions == "cerradaPropia")
+                                <a href="#" class="mb-4 black" data-toggle="modal" data-target="#createAnswer" onclick="recibirValue('questionId', '{{$question->id}}')">
+                                    {{$loop->iteration}}. {{$question->question}}
+                                </a>
+                            @endif
+                            
                         </p>
+
+                        <div class="row d-flex justify-content-around">
+                        @foreach ($question->answers as $answer)
+                            
+                            
+                                <p>
+                                    {{$loop->iteration}}. {{$answer->answer}}
+                                </p>
+                            
+                            
+                            
+                        @endforeach
+                        </div> 
+
                     @endforeach
 
                 @endforeach

@@ -60,6 +60,9 @@
                         <div class="text-muted card-text">
                             {{$survey->created_at}}
                         </div>
+                        <a href="/survey/edit/{{$survey->id}}" class="alert-link">
+                            Editar la encuesta
+                        </a>
                     </div>
                     
     

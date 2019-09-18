@@ -52,11 +52,11 @@
 
                         <p class="question">
 
-                            @if( $question->typeQuestions == "cerradaDefault")
+                            @if( ($question->typeQuestions == "cerradaDefault") or ($question->typeQuestions == "abierta"))
                                 {{$loop->iteration}}. {{$question->question}}
                             @endif
 
-                            @if( $question->typeQuestions == "cerradaPropia")
+                            @if( ($question->typeQuestions == "cerradaPropia") or ($question->typeQuestions == "cerradaMasOtro") )
                                 <a href="#" class="mb-4 black" data-toggle="modal" data-target="#createAnswer" onclick="recibirValue('questionId', '{{$question->id}}')">
                                     {{$loop->iteration}}. {{$question->question}}
                                 </a>

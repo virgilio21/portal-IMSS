@@ -105,7 +105,15 @@ class SurveysController extends Controller
                 'answer' => 'Muy insatisfecho',
                 'question_id' => $myQuestion->id,
             ]);
+        }
 
+        if( $myQuestion ->typeQuestions == "cerradaMasOtro" ){
+
+            Answer::create([
+
+                'answer' => 'Otro',
+                'question_id' => $myQuestion->id,
+            ]);
         }
 
         return redirect('/survey/'.$survey->id);
@@ -124,7 +132,8 @@ class SurveysController extends Controller
 
         return redirect('/survey/'.$survey->id);
 
-        
+
+
     }
 
 
@@ -133,6 +142,18 @@ class SurveysController extends Controller
         
         return $survey = Survey::where('id', $surveyId)->firstOrFail();
  
+    }
+
+    public function editSurvey( $surveyId ){
+
+        $survey = $this->findById($surveyId);
+
+        session()->flash('survey', $survey);
+
+        return view('surveys.edit', [
+            'survey' => $survey
+        ]);
+
     }
 
 }

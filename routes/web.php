@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/survey/section/create', 'SurveysController@createSection');
     Route::post('/survey/question/create', 'SurveysController@createQuestion');
     Route::post('/survey/answer/create', 'SurveysController@createAnswer');
+    Route::get('/survey/edit/{id}', 'SurveysController@editSurvey');
 
 });
 

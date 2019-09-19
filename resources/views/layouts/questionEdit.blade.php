@@ -1,5 +1,5 @@
 <form action="/survey/question/edit" method="POST" id="form-question">
-    <div class="modal fade" id="editQuestion" role="dialog">
+<div class="modal fade" id="editQuestion{{$loop->iteration}}<?php echo($contador);?>" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -16,15 +16,9 @@
                                     <div class="col-md-12 mt-4">
                                         
                                             {{ csrf_field() }}
-                                        <input id="question" type="text" class="form-control" name="question" value="{{ old('question') }}" required autocomplete="question" >
+                                        <input id="question" type="text" class="form-control" name="question" value="{{ $question->question }}" required autocomplete="question" >
     
-                                        @if( $errors->has('question'))
-    
-                                            
-                                            @foreach ($errors->get('question') as $error)
-                                                <div class="form-control-feedback" >{{$error}}</div>
-                                            @endforeach
-                                        @endif                                    
+                                                                      
                                     </div>
                             </div>
                     </div>

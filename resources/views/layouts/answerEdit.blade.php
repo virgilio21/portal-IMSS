@@ -1,7 +1,5 @@
-
-    
 <form action="/survey/answer/edit" method="POST" id="form-answer">
-    <div class="modal fade" id="editAnswer" role="dialog">
+<div class="modal fade" id="editAnswer<?php echo($contadorRespuestas)?>" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -18,7 +16,7 @@
                                     <div class="col-md-12 mt-4">
                                         
                                             {{ csrf_field() }}
-                                        <input id="answer" type="text" class="form-control" name="answer" value="{{ old('answer') }}" required autocomplete="answer" >
+                                        <input id="answer" type="text" class="form-control" name="answer" value="{{ $answer->answer }}" required autocomplete="answer" >
     
                                         @if( $errors->has('answer'))
     

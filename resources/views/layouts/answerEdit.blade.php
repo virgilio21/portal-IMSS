@@ -1,5 +1,5 @@
 <form action="/survey/answer/edit" method="POST" id="form-answer">
-<div class="modal fade" id="editAnswer<?php echo($contadorRespuestas)?>" role="dialog">
+<div class="modal fade" id="editAnswer" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -16,7 +16,7 @@
                                     <div class="col-md-12 mt-4">
                                         
                                             {{ csrf_field() }}
-                                        <input id="answer" type="text" class="form-control" name="answer" value="{{ $answer->answer }}" required autocomplete="answer" >
+                                        <input id="answer" type="text" class="form-control" name="answer" required autocomplete="answer" >
     
                                         @if( $errors->has('answer'))
     
@@ -24,7 +24,11 @@
                                             @foreach ($errors->get('answer') as $error)
                                                 <div class="form-control-feedback" >{{$error}}</div>
                                             @endforeach
-                                        @endif                                    
+                                        @endif  
+                                        
+                                        <input id="answerId" type="hidden" class="form-control" name="answerId" required>
+
+                                        
                                     </div>
                             </div>
 
@@ -43,3 +47,19 @@
         </div>   
 </form>
 
+
+<script>
+    $(document).ready(function(){
+
+       
+
+        //Vaciar el campo de la pregunta cuando se presiona el boton close o el boton de la parte superior derecha
+        $('.btn-cerrar').on("click", function(event){
+            event.preventDefault();
+            $('#form-answer').trigger("reset");
+        });
+
+        
+    });
+
+</script>

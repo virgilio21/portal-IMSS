@@ -16,7 +16,7 @@
                                     <div class="col-md-12 mt-4">
                                         
                                             {{ csrf_field() }}
-                                        <input id="nameSurvey" type="text" class="form-control" name="nameSurvey" value="{{ $survey->name }}" required autocomplete="nameSurvey" >
+                                        <input id="nameSurvey" type="text" class="form-control" name="nameSurvey" required autocomplete="nameSurvey" >
     
                                         @if( $errors->has('nameSurvey'))
     
@@ -24,7 +24,9 @@
                                             @foreach ($errors->get('nameSurvey') as $error)
                                                 <div class="form-control-feedback" >{{$error}}</div>
                                             @endforeach
-                                        @endif                                    
+                                        @endif  
+                                        <input id="surveyId" type="hidden" class="form-control" name="surveyId" required>
+
                                     </div>
                             </div>
                     </div>
@@ -39,4 +41,20 @@
             </div>
         </div>   
 </form>
+
+<script>
+    $(document).ready(function(){
+
+       
+
+        //Vaciar el campo de la pregunta cuando se presiona el boton close o el boton de la parte superior derecha
+        $('.btn-cerrar').on("click", function(event){
+            event.preventDefault();
+            $('#form-survey').trigger("reset");
+        });
+
+        
+    });
+
+</script>
     

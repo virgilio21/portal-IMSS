@@ -1,74 +1,65 @@
 @extends('layouts.app')
 
 
+
 @section('content')
-
-    <h1 class="mb-4">
-
-        Nombre:
-        <a href="#" class="mb-4" data-toggle="modal" data-target="#editSurvey" >{{$survey->name }} 🐤</a>
-        @include('layouts.surveyEdit')
-        
     
-    </h1>
     
+<a href="#" class="mb-4" data-toggle="modal" data-target="#editSurvey" onclick="recibirValue( 'nameSurvey','{{$survey->name}}', 'surveyId','{{$survey->id}}' );"><h1>{{$survey->name}}</h1></a>
 
-
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
-            <?php 
-                            
-                            $contador = 0;
-                            $contadorRespuestas = 0
-            ?>
-            @foreach ($survey->sections as $section)
-                <h2 class="card-text">
-                <a href="#" class="mb-4" data-toggle="modal" data-target="#editSection{{$loop->iteration}}">
-                        
-                        {{$section->name}}</a>
-                </h2>
-                <div class="text-muted card-text">
+                @foreach ($survey->sections as $section)
+                    <h2 class="card-text">
+                    <a href="#" class="mb-4" data-toggle="modal" data-target="#editSection" onclick="recibirValue( 'nameSection','{{$section->name}}', 'sectionId', '{{$section->id}}');">{{$section->name}}</a>
+                    </h2>
+                    <div class="text-muted card-text">
                         {{$section->created_at}}
-                </div>
-
-                @include('layouts.sectionEdit')
-
-                @foreach ($section->questions as $question)
-
-                    <p class="question">
-
-                        <?php $contador++;?>
-                    <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editQuestion{{$loop->iteration}}<?php echo($contador)?>">
-                                {{$loop->iteration}}. {{$question->question}}</a>
-                            
-                            @include('layouts.questionEdit')
-                        
-                    </p>
-
-                    <div class="d-flex justify-content-around">
-                            @foreach ($question->answers as $answer)
-                                <?php $contadorRespuestas++;?>
-                                <p>
-                                <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editAnswer<?php echo($contadorRespuestas)?>" > {{$loop->iteration}}. {{$answer->answer}}</a>
-                                @include('layouts.answerEdit')
-                                </p>
-                                
-                            @endforeach
                     </div>
+
+                    @foreach ($section->questions as $question)
+
+                        <p class="question">                           
+                        <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editQuestion" onclick="recibirValue('question', '{{$question->question}}', 'questionId', '{{$question->id}}' )">
+                                    {{$loop->iteration}}. {{$question->question}}
+                                </a>
+                        </p>
+
+                        <div class="row d-flex justify-content-around">
+                        @foreach ($question->answers as $answer)
+                            
+                            
+                                <p>
+                                    <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editAnswer" onclick="recibirValue('answer', '{{$answer->answer}}', 'answerId', '{{$answer->id}}' )">
+                                                {{$loop->iteration}}. {{$answer->answer}}
+                                    </a>
+                                    
+                                </p>
+                            
+                            
+                            
+                        @endforeach
+                        </div> 
+
+                    @endforeach
+
                 @endforeach
-            @endforeach
+            
         </div>
     </div>
+     
 
+    
+    @include('layouts.surveyEdit')
+    @include('layouts.sectionEdit')
+    @include('layouts.questionEdit')
+    @include('layouts.answerEdit')
+    <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>
 
-
-
-<!--Zona de include y scripts-->
-
-
-
-
-
-
-
+    
 @endsection
+
+
+    
+
+

@@ -1,4 +1,4 @@
-<form action="/survey/answer/edit" method="POST" id="form-answer">
+<form action="/survey/update/answer" method="POST" id="form-answer">
 <div class="modal fade" id="editAnswer" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

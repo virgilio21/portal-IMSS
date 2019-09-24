@@ -7,6 +7,10 @@
     
 <a href="#" class="mb-4" data-toggle="modal" data-target="#editSurvey" onclick="recibirValue( 'nameSurvey','{{$survey->name}}', 'surveyId','{{$survey->id}}' );"><h1>{{$survey->name}}</h1></a>
 
+<a href="#" class="mb-4" data-toggle="modal" data-target="#removeItem">
+    Remove
+</a>
+
     <div class="row mt-4">
         <div class="col-12">
                 @foreach ($survey->sections as $section)
@@ -48,16 +52,18 @@
         </div>
     </div>
      
-
+    
     
     @include('layouts.surveyEdit')
     @include('layouts.sectionEdit')
     @include('layouts.questionEdit')
     @include('layouts.answerEdit')
+    @include('layouts.removeItem')
     <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>
 
     
 @endsection
+
 
 
     

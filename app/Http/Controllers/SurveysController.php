@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateSurveyRequest;
 use App\Http\Requests\CreateSectionRequest;
 use App\Http\Requests\CreateAnswerRequest;
+use App\Http\Requests\UpdateSurveyRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Question;
 use App\Section;
 
@@ -153,6 +155,67 @@ class SurveysController extends Controller
         return view('surveys.edit', [
             'survey' => $survey
         ]);
+
+    }
+
+
+    //Update data
+
+    public function updateSurvey( UpdateSurveyRequest $request){
+
+
+
+        $mySurvey = $this->findById( $request->input('surveyId') );
+
+        $mySurvey->name = $request->input('nameSurvey');
+
+        $mySurvey->save();
+
+        $survey = session('survey');
+
+        return redirect('/survey/edit/'.$survey->id);
+
+
+    }
+
+    public function updateSection( CreateSectionRequest $request ){
+
+        $mySection = Section::where('id', $request->input('sectionId'))->firstOrFail();
+
+        $mySection->name = $request->input('nameSection');
+
+        $mySection->save();
+
+        $survey = session('survey');
+
+        return redirect('/survey/edit/'.$survey->id);
+
+    }
+
+    public function updateQuestion( UpdateQuestionRequest $request ){
+
+        $myQuestion = Question::where('id', $request->input('questionId'))->firstOrFail();
+
+        $myQuestion->question = $request->input('question');
+
+        $myQuestion->save();
+
+        $survey = session('survey');
+
+        return redirect('/survey/edit/'.$survey->id);
+    }
+
+    public function updateAnswer ( CreateAnswerRequest $request ){
+
+        $myAnswer = Answer::where('id', $request->input('answerId'))->firstOrFail();
+
+        $myAnswer->answer = $request->input('answer');
+
+        $myAnswer->save();
+
+        $survey = session('survey');
+
+        return redirect('/survey/edit/'.$survey->id);
 
     }
 

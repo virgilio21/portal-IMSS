@@ -248,4 +248,15 @@ class SurveysController extends Controller
         return redirect('/survey/edit/'.$survey->id);
     }
 
+    public function showFormUsers( $id ){
+
+        $survey = $this->findById($id);
+
+        session()->flash('survey', $survey);
+        
+        return view( 'surveys.answersUsers', [
+            'survey' => $survey,
+        ]);
+    }
+
 }

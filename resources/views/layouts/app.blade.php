@@ -12,10 +12,12 @@
     <!-- Scripts -->
     <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/e363b9fbaa.js" crossorigin="anonymous" defer></script>
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

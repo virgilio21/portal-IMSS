@@ -18,7 +18,7 @@ class AddSectionsIdToQuestionsTable extends Migration
 
             $table->bigInteger('section_id')->unsigned();
 
-            $table->foreign('section_id')->references('id')->on('sections');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
         });
     }
 

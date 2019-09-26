@@ -17,7 +17,7 @@ class AddSurveyIdToSectionsTable extends Migration
             //
             $table->bigInteger('survey_id')->unsigned();
 
-            $table->foreign('survey_id')->references('id')->on('surveys');
+            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade');
         });
     }
 

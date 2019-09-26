@@ -6,6 +6,7 @@
     
     
     <h1>{{$survey->name}}</h1>
+    <a href="/survey/edit/{{$survey->id}}">Ir a la vista de edición.</a>
 
     <div class="row">
 
@@ -18,7 +19,7 @@
                 <div class="form-group">
                 
                     {{ csrf_field() }}
-                    <input class="form-control" type="text" name="nameSection" placeholder="¿Cual es el nombre de tu nueva sección?" value='{{ old('nameSection') }}' required autocomplete="nameSection"  />
+                    <input class="form-control mt-3" type="text" name="nameSection" placeholder="¿Cual es el nombre de tu nueva sección?" value='{{ old('nameSection') }}' required autocomplete="nameSection"  />
 
                     
 

@@ -219,4 +219,33 @@ class SurveysController extends Controller
 
     }
 
+    public function deleteItem( Request $request ){
+
+        $id = $request->input('itemId');
+        $type = $request->input('itemType');
+        $survey = session('survey');
+        if( $type == 'section' ){
+
+            $deleteItem = Section::where('id', $id)->firstOrFail();
+            $deleteItem->delete();
+            
+
+            return redirect('/survey/edit/'.$survey->id);
+
+        }
+        elseif( $type == 'question' ){
+            $deleteItem = Question::where('id', $id)->firstOrFail();
+            $deleteItem->delete();
+        }
+        else{
+
+            $deleteItem = Answer::where('id', $id)->firstOrFail();
+            $deleteItem->delete();
+        }
+
+
+
+        return redirect('/survey/edit/'.$survey->id);
+    }
+
 }

@@ -17,10 +17,10 @@
                                             
                                                 {{ csrf_field() }}
                                             
-                                            <p class="text-white bg-danger font-italic">Nota: todos los elementos que dependen de este tambien seran eliminados.</p>
-                                            <input id="itemId" type="hidden" class="form-control" name="itemId" required>
+                                            <p class="text-white bg-danger font-italic question">Nota: Todos los elementos que dependen de este tambien seran eliminados.</p>
+                                            <input id="itemId" type="text" class="form-control" name="itemId" required>
 
-                                            <input id="typeItem" type="text" class="form-control" name="typeItem" required>
+                                            <input id="itemType" type="text" class="form-control" name="itemType" required>
     
                                             
                                         </div>

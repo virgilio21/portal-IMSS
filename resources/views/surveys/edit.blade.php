@@ -39,7 +39,7 @@
                             
                             
                                 <p>
-                                    @if( ($answer->answer == 'Otro') or ($answer->answer == 'Muy satisfecho') or ($answer->answer == 'Satisfecho') or ($answer->answer == 'Ni satisfecho, ni insatisfecho') or ($answer->answer == 'Insatisfecho') or ($answer->answer == 'Muy insatisfecho'))
+                                    @if( ($answer->answer == 'Otro') or ($answer->answer == 'Muy satisfecho') or ($answer->answer == 'Satisfecho') or ($answer->answer == 'Ni satisfecho, ni insatisfecho') or ($answer->answer == 'Insatisfecho') or ($answer->answer == 'Muy insatisfecho') or ($answer->answer == 'Esta es una pregunta abierta'))
                                     
                                     {{$loop->iteration}}. {{$answer->answer}}
                                     @else

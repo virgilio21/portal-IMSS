@@ -35,13 +35,25 @@
                                 <div class="form-group">
                                 <textarea name="abierta{{$question->id}}" id="" cols="70" rows="5"></textarea>
                                 </div>
+                            
+                            @elseif( $question->typeQuestions == "cerradaMasOtro")
 
+                                <div class="form-check-inline">
+                                
+                                <label class="form-check-label" for="radio{{$answer->id}}">
+                                <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
+                                @if($answer->answer == 'Otro')
+                                <input type="text" name="optradio{{$question->id}}opcional">
+                                @endif  
+                                </div>
+                            @else
+                                <div class="form-check-inline">
+                                <label class="form-check-label" for="radio{{$answer->id}}">
+                                <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}} 
+                                </div>
                             @endif
 
-                            <div class="form-check-inline">
-                            <label class="form-check-label" for="radio{{$answer->id}}">
-                            <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->answer}}" >{{$answer->answer}} 
-                            </div>
+                            
 
                             
                                 
@@ -72,6 +84,12 @@
     
     
     <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>
+
+    <script>
+    
+    
+       
+    </script>
 
     
 @endsection

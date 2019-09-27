@@ -109,11 +109,19 @@ class SurveysController extends Controller
             ]);
         }
 
-        if( $myQuestion ->typeQuestions == "cerradaMasOtro" ){
+        if( $myQuestion->typeQuestions == "cerradaMasOtro" ){
 
             Answer::create([
 
                 'answer' => 'Otro',
+                'question_id' => $myQuestion->id,
+            ]);
+        }
+
+        if ( $myQuestion->typeQuestions == "abierta"){
+
+            Answer::create([
+                'answer' => 'Esta es una pregunta abierta',
                 'question_id' => $myQuestion->id,
             ]);
         }

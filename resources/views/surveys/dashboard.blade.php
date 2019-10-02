@@ -58,13 +58,30 @@
             @forelse ($surveys as $survey)
                 <div class="col-6">
                     
-                 
+                    
                     <div class="alert alert-primary" role="alert">
                         <a href="/survey/{{$survey->id}}" class="alert-link">{{$survey->name}} 
                         </a>
                     <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
                         <div class="text-muted card-text">
                             {{$survey->created_at}}
+                            @if( $survey->visibility == 0 )
+                                <form action="/survey/hidden/" method="POST">
+                                <input type="hidden" name="surveyId" value="{{$survey->id}}">
+                                    {{ csrf_field() }}
+                                    <button class="btn btn-success">
+                                        Activar
+                                    </button>
+                                </form>
+                            @else
+                                <form action="/survey/hidden/" method="POST">
+                                <input type="hidden" name="surveyId" value="{{$survey->id}}">
+                                    {{ csrf_field() }}
+                                    <button class="btn btn-warning">
+                                        Hidden
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                     
@@ -88,4 +105,5 @@
             @endif
         </div>
 
+        <a href="/survey/list">ver modo usuario</a>
 @endsection

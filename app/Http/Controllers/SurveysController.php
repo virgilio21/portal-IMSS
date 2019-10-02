@@ -20,7 +20,7 @@ class SurveysController extends Controller
 
     public function home(){
 
-        $surveys = Survey::latest()->paginate(3);
+        $surveys = Survey::latest()->paginate(4);
 
 
         return view('surveys.dashboard', [
@@ -265,6 +265,30 @@ class SurveysController extends Controller
         return view( 'surveys.answersUsers', [
             'survey' => $survey,
         ]);
+    }
+
+    public function listSurveys(){
+
+        $surveys = Survey::latest()->paginate(4);
+
+
+        return view('surveys.listSurveysUsers', [
+
+            'surveys' => $surveys,
+        ]);
+    }
+
+
+    public function hiddenSurvey( Request $request ){
+
+        $survey = $this->findById($request->input('surveyId'));
+
+        $survey->visibility = !($survey->visibility);
+
+        $survey->save();
+        
+
+        return redirect('/survey/');
     }
 
 }

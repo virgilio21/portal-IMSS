@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-12">
                     @foreach ($survey->sections as $section)
-                        <h2 class="card-text mt-4">
+                        <h2 class="card-text mt-4 ">
                         {{$section->name}}
                         </h2>
                         <div class="text-muted card-text mb-2">

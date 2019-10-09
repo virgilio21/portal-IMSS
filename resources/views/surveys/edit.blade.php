@@ -16,7 +16,7 @@
                     <h2 class="card-text">
                     <a href="#" class="mb-4" data-toggle="modal" data-target="#editSection" onclick="recibirValue( 'nameSection','{{$section->name}}', 'sectionId', '{{$section->id}}');">{{$section->name}}</a>
                     <a href="#" data-toggle="modal" data-target="#removeItem" onclick="recibirValue('itemId', '{{$section->id}}', 'itemType','section')">
-                    <i class="far fa-trash-alt text-danger">jj</i>
+                    <i class="far fa-trash-alt text-danger"></i>
                     </a>
                     </h2>
                     <div class="text-muted card-text">
@@ -30,7 +30,7 @@
                                     {{$loop->iteration}}. {{$question->question}}
                         </a>
                         <a href="#" data-toggle="modal" data-target="#removeItem" >
-                            <i class="far fa-trash-alt text-success" onclick="recibirValue('itemId', '{{$question->id}}', 'itemType','question')">ff</i>
+                            <i class="far fa-trash-alt text-success" onclick="recibirValue('itemId', '{{$question->id}}', 'itemType','question')"></i>
                         </a>
                         </p>
 
@@ -50,7 +50,7 @@
                                     </a>
 
                                     <a href="#" data-toggle="modal" data-target="#removeItem" onclick="recibirValue('itemId', '{{$answer->id}}', 'itemType','answer')">
-                                        <i class="far fa-trash-alt text-primary">hh</i>
+                                        <i class="far fa-trash-alt text-primary"></i>
                                     </a>
 
                                     @endif

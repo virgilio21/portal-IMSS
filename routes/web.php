@@ -52,9 +52,12 @@ Route::group(['middleware' => 'auth'], function(){
     
     Route::get('/survey/response/{id}', 'SurveysController@showFormUsers');
     Route::post('/survey/hidden/','SurveysController@hiddenSurvey');
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
+    
 
     //Users views
+    
     
 });
 

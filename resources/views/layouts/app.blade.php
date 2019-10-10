@@ -39,10 +39,16 @@
                     <ul class="navbar-nav mr-auto">
                         
                         @if(Auth::check())
-
+                            
+                            @if(Auth::user()->hasRole('admin'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/survey">Encuestas</a>
+                                </li>
+                            @else
                             <li class="nav-item">
-                                <a class="nav-link" href="/survey">Encuestas</a>
+                                <a class="nav-link" href="/survey/list">Encuestas</a>
                             </li>
+                            @endif
 
                         @endif
                     </ul>

@@ -18,9 +18,8 @@
                     <div class="col-6">    
                         
                         <div class="alert alert-primary" role="alert">
-                            <a href="/survey/{{$survey->id}}" class="alert-link">{{$survey->name}} 
+                            <a href="/survey/response/{{$survey->id}}" class="alert-link">{{$survey->name}} 
                             </a>
-                        <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
                             <div class="text-muted card-text">
                                 {{$survey->created_at}}
                             </div>
@@ -36,9 +35,8 @@
                     <div class="col-6">    
                         
                         <div class="alert alert-primary" role="alert">
-                            <a href="/survey/{{$survey->id}}" class="alert-link">{{$survey->name}} 
+                            <a href="/survey/response/{{$survey->id}}" class="alert-link">{{$survey->name}} 
                             </a>
-                        <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
                             <div class="text-muted card-text">
                                 {{$survey->created_at}}
                             </div>

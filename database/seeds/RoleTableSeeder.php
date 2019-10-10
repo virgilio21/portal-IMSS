@@ -53,5 +53,18 @@ class RoleTableSeeder extends Seeder
 
         $teacher->roles()->attach(Role::where('name', 'teacher')->firstOrFail());
 
+
+        $teacher = new User();
+        $teacher->name = 'Virgo';
+        $teacher->surnames = 'Padron Batun';
+        $teacher->email = 'admin@gmail.com';
+        $teacher->address = '17a x 18 y 20';
+        $teacher->phone = '999-999-4343';
+        $teacher->enrollment= 'E15080429'; 
+        $teacher->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+        $teacher->save();
+
+        $teacher->roles()->attach(Role::where('name', 'admin')->firstOrFail());
+
     }
 }

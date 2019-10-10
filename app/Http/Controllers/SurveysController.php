@@ -18,8 +18,9 @@ class SurveysController extends Controller
 {
     
 
-    public function home(){
+    public function home( Request $request ){
 
+        $request->user()->authorizeRoles('admin');
         $surveys = Survey::latest()->paginate(4);
 
 
@@ -29,8 +30,9 @@ class SurveysController extends Controller
         ]);
     }
 
-    public function create(CreateSurveyRequest $request){
+    public function create( CreateSurveyRequest $request ){
 
+        $request->user()->authorizeRoles('admin');
         Survey::create([
             
             'name' => $request->input('nameSurvey'),
@@ -42,8 +44,9 @@ class SurveysController extends Controller
         return redirect('/survey');
     }
 
-    public function show( $surveyId ){
+    public function show( $surveyId, Request $request ){
 
+        $request->user()->authorizeRoles('admin');
         $survey = $this->findById($surveyId);
 
         session()->flash('survey', $survey);
@@ -56,6 +59,7 @@ class SurveysController extends Controller
 
     public function createSection(CreateSectionRequest $request){
 
+        $request->user()->authorizeRoles('admin');
         $survey = session('survey');
 
         Section::create([
@@ -71,6 +75,8 @@ class SurveysController extends Controller
 
     public function createQuestion(CreateQuestionRequest $request){
 
+        $request->user()->authorizeRoles('admin');
+
         $survey = session('survey');
 
        $myQuestion =  Question::create([
@@ -83,6 +89,8 @@ class SurveysController extends Controller
 
         if( $myQuestion->typeQuestions == 'cerradaDefault' ){
             
+            $request->user()->anthorizeRoles('admin');
+
             Answer::create([
                 'answer' => 'Muy satisfecho',
                 'question_id' => $myQuestion->id,
@@ -133,6 +141,7 @@ class SurveysController extends Controller
 
     public function createAnswer(createAnswerRequest $request){
 
+        $request->user()->authorizeRoles('admin');
         $survey = session('survey');
 
         Answer::create([
@@ -154,8 +163,9 @@ class SurveysController extends Controller
  
     }
 
-    public function editSurvey( $surveyId ){
+    public function editSurvey( $surveyId , Request $request ){
 
+        $request->user()->authorizeRoles('admin');
         $survey = $this->findById($surveyId);
 
         session()->flash('survey', $survey);
@@ -172,7 +182,7 @@ class SurveysController extends Controller
     public function updateSurvey( UpdateSurveyRequest $request){
 
 
-
+        $request->user()->authorizeRoles('admin');
         $mySurvey = $this->findById( $request->input('surveyId') );
 
         $mySurvey->name = $request->input('nameSurvey');
@@ -188,6 +198,7 @@ class SurveysController extends Controller
 
     public function updateSection( CreateSectionRequest $request ){
 
+        $request->user()->authorizeRoles('admin');
         $mySection = Section::where('id', $request->input('sectionId'))->firstOrFail();
 
         $mySection->name = $request->input('nameSection');
@@ -202,6 +213,7 @@ class SurveysController extends Controller
 
     public function updateQuestion( UpdateQuestionRequest $request ){
 
+        $request->user()->authorizeRoles('admin');
         $myQuestion = Question::where('id', $request->input('questionId'))->firstOrFail();
 
         $myQuestion->question = $request->input('question');
@@ -215,6 +227,7 @@ class SurveysController extends Controller
 
     public function updateAnswer ( CreateAnswerRequest $request ){
 
+        $request->user()->authorizeRoles('admin');
         $myAnswer = Answer::where('id', $request->input('answerId'))->firstOrFail();
 
         $myAnswer->answer = $request->input('answer');
@@ -229,6 +242,7 @@ class SurveysController extends Controller
 
     public function deleteItem( Request $request ){
 
+        $request->user()->authorizeRoles('admin');
         $id = $request->input('itemId');
         $type = $request->input('itemType');
         $survey = session('survey');
@@ -256,8 +270,9 @@ class SurveysController extends Controller
         return redirect('/survey/edit/'.$survey->id);
     }
 
-    public function showFormUsers( $id ){
+    public function showFormUsers( $id, Request $request){
 
+       
         $survey = $this->findById($id);
 
         session()->flash('survey', $survey);
@@ -281,6 +296,7 @@ class SurveysController extends Controller
 
     public function hiddenSurvey( Request $request ){
 
+        $request->user()->authorizeRoles('admin');
         $survey = $this->findById($request->input('surveyId'));
 
         $survey->visibility = !($survey->visibility);

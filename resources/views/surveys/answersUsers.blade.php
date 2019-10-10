@@ -5,13 +5,13 @@
 @section('content')
     
     
-    <h1 class="">{{$survey->name}}</h1>
+    <h1 class="text-danger">{{$survey->name}}</h1>
     
     <form action="/survey/send/answers" method="POST"> 
         <div class="row">
             <div class="col-12">
                     @foreach ($survey->sections as $section)
-                        <h2 class="card-text mt-4 ">
+                        <h2 class="card-text mt-4 text-success">
                         {{$section->name}}
                         </h2>
                         <div class="text-muted card-text mb-2">

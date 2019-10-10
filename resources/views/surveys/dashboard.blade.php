@@ -105,5 +105,5 @@
             @endif
         </div>
 
-        <a href="/survey/list">ver modo usuario</a>
+        
 @endsection

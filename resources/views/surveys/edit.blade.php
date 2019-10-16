@@ -39,12 +39,15 @@
                             
                             
                                 <p>
-                                    @if( ($answer->answer == 'Otro') or ($answer->answer == 'Muy satisfecho') or ($answer->answer == 'Satisfecho') or ($answer->answer == 'Ni satisfecho, ni insatisfecho') or ($answer->answer == 'Insatisfecho') or ($answer->answer == 'Muy insatisfecho') or ($answer->answer == 'Esta es una pregunta abierta'))
+                                    @if( ($answer->answer == 'Otro') or ($answer->answer == 'Muy satisfecho') or ($answer->answer == 'Satisfecho') or ($answer->answer == 'Ni satisfecho, ni insatisfecho') or ($answer->answer == 'Insatisfecho') or ($answer->answer == 'Muy insatisfecho'))
+                                        
+                                        {{$loop->iteration}}. {{$answer->answer}}
+                                        
+                                    @elseif( $answer->question->typeQuestions == 'abierta' )
+                                        {{$loop->iteration}}. {{$answer->answer}}
+                            
                                     
-                                    {{$loop->iteration}}. {{$answer->answer}}
                                     @else
-                                    
-
                                     <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editAnswer" onclick="recibirValue('answer', '{{$answer->answer}}', 'answerId', '{{$answer->id}}' )">
                                             {{$loop->iteration}}. {{$answer->answer}}
                                     </a>

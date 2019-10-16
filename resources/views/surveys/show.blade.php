@@ -70,7 +70,9 @@
                             
                             
                                 <p>
+                                    @if( $answer->question->typeQuestions != 'abierta' )
                                     {{$loop->iteration}}. {{$answer->answer}}
+                                    @endif
                                 </p>
                             
                             

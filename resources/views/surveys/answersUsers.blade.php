@@ -22,22 +22,24 @@
                         @foreach ($section->questions as $question)
 
                             <p class="question mt-5">
-
+                                
                             {{$loop->iteration}}. {{$question->question}}
                                 
                             </p>
                             
-
-                            <div class="row d-flex justify-content-around">
-                            @foreach ($question->answers as $answer)
-                                
                             @if( $question->typeQuestions == "abierta")
 
                                 <div class="form-group">
                                 <textarea name="abierta{{$question->id}}" id="" cols="70" rows="5"></textarea>
                                 </div>
+                            @endif
+
+
+                            <div class="row d-flex justify-content-around">
+                            @foreach ($question->answers as $answer)
+                                
                             
-                            @elseif( $question->typeQuestions == "cerradaMasOtro")
+                            @if( $question->typeQuestions == "cerradaMasOtro" )
 
                                 <div class="form-check-inline">
                                 
@@ -47,11 +49,13 @@
                                 <input type="text" name="optradio{{$question->id}}Otro" >
                                 @endif  
                                 </div>
-                            @else
+                            @elseif( $question->typeQuestions != 'abierta' )
                                 <div class="form-check-inline">
                                 <label class="form-check-label" for="radio{{$answer->id}}">
                                 <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}} 
                                 </div>
+                            
+                                
                             @endif
 
                             

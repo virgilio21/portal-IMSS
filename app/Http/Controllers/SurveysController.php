@@ -313,7 +313,7 @@ class SurveysController extends Controller
         $Me = $request->user();
                     
 
-        dd($answers);
+//        dd($Me);
         foreach( $answers as $key => $value ){
             
            if( $key != '_token' ){
@@ -346,19 +346,19 @@ class SurveysController extends Controller
 
                 }
                 else{
-
-                    $myAnswer = Answer::where( 'id', $value )->firstOrFail();
-                    $Me->answers()->attach($ $myAnswer->id );
+                    if( isset( $value ) ){
+                        $myAnswer = Answer::where( 'id', $value )->firstOrFail();
+                        $Me->answers()->attach( $myAnswer->id );
+                    
+                    }
+                    
 
                 }
-
-            
-            
-
            }
-
         }
 
+
+        return redirect('/survey');
 
        
     }

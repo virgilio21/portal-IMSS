@@ -8,6 +8,7 @@
     <h1 class="text-danger">{{$survey->name}}</h1>
     
     <form action="/survey/send/answers" method="POST"> 
+        {{ csrf_field() }}
         <div class="row">
             <div class="col-12">
                     @foreach ($survey->sections as $section)
@@ -43,7 +44,7 @@
                                 <label class="form-check-label" for="radio{{$answer->id}}">
                                 <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
                                 @if($answer->answer == 'Otro')
-                                <input type="text" name="optradio{{$question->id}}opcional">
+                                <input type="text" name="optradio{{$question->id}}Otro" >
                                 @endif  
                                 </div>
                             @else

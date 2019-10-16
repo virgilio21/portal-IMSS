@@ -89,7 +89,7 @@ class SurveysController extends Controller
 
         if( $myQuestion->typeQuestions == 'cerradaDefault' ){
             
-            $request->user()->anthorizeRoles('admin');
+            $request->user()->authorizeRoles('admin');
 
             Answer::create([
                 'answer' => 'Muy satisfecho',
@@ -305,6 +305,62 @@ class SurveysController extends Controller
         
 
         return redirect('/survey/');
+    }
+
+    public function sendAnswers( Request $request ){
+
+        $answers = $request->all();
+        $Me = $request->user();
+                    
+
+        dd($answers);
+        foreach( $answers as $key => $value ){
+            
+           if( $key != '_token' ){
+
+                if( str_contains( $key, 'abierta') ){
+
+                    $questionId = preg_replace( "/[^0-9]/", "", "$key" );
+
+                   $myAnswer =  Answer::create([
+                        'answer' => $value,
+                        'question_id' => $questionId,
+                    ]);
+
+                    $Me->answers()->attach( $myAnswer->id );
+                    
+                }
+                elseif( ( str_contains( $key, 'Otro' ) ) And  ( isset( $value ) ) ){
+                    
+                    $questionId = preg_replace( "/[^0-9]/", "", "$key" );
+
+                   $myAnswer = Answer::create([
+                        'answer' => $value,
+                        'question_id' => $questionId,
+                    ]);
+
+                    $Me->answers()->attach( $myAnswer->id );
+
+
+
+
+                }
+                else{
+
+                    $myAnswer = Answer::where( 'id', $value )->firstOrFail();
+                    $Me->answers()->attach($ $myAnswer->id );
+
+                }
+
+            
+            
+
+           }
+
+        }
+
+
+       
     }
 
 }

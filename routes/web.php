@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'], function(){
 
     //Capture Answers
     Route::post('/survey/send/answers', 'SurveysController@sendAnswers');
+
+
+    //View Results
+    Route::get('/survey/results/{id}', 'SurveysController@viewResults');
     
     
 });

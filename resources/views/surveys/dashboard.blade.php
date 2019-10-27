@@ -62,9 +62,13 @@
                     <div class="alert alert-primary" role="alert">
                         <a href="/survey/{{$survey->id}}" class="alert-link">{{$survey->name}} 
                         </a>
-                    <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
-                        <div class="text-muted card-text">
+                        <span class="text-muted">
                             {{$survey->created_at}}
+                        </span>
+                        
+                    <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
+                        <div class="text-muted card-text d-flex justify-content-around">
+                            
                             @if( $survey->visibility == 0 )
                                 <form action="/survey/hidden/" method="POST">
                                 <input type="hidden" name="surveyId" value="{{$survey->id}}">
@@ -81,7 +85,10 @@
                                         Hidden
                                     </button>
                                 </form>
+
+                                <a href="/survey/results/{{$survey->id}}" class="btn btn-primary">Ver resultados</a>
                             @endif
+                            
                         </div>
                     </div>
                     

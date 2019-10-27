@@ -313,7 +313,7 @@ class SurveysController extends Controller
         $Me = $request->user();
                     
 
-//        dd($Me);
+//      dd($answers);
         foreach( $answers as $key => $value ){
             
            if( $key != '_token' ){
@@ -332,6 +332,7 @@ class SurveysController extends Controller
                 }
                 elseif( ( str_contains( $key, 'Otro' ) ) And  ( isset( $value ) ) ){
                     
+                  //  dd($answers);
                     $questionId = preg_replace( "/[^0-9]/", "", "$key" );
 
                    $myAnswer = Answer::create([
@@ -341,26 +342,71 @@ class SurveysController extends Controller
 
                     $Me->answers()->attach( $myAnswer->id );
 
-
-
-
                 }
-                else{
-                    if( isset( $value ) ){
+                elseif( str_contains( $key, 'Otro' ) != true ){
+                    
                         $myAnswer = Answer::where( 'id', $value )->firstOrFail();
-                        $Me->answers()->attach( $myAnswer->id );
-                    
-                    }
-                    
-
+                        
+                        if( $myAnswer->answer != 'Otro' ){
+                            $Me->answers()->attach( $myAnswer->id );
+                        }
                 }
            }
         }
 
+        //Redireccion
+        if( $Me->hasRole('admin') ){
+            return redirect('/survey');
+        }
+        else{
 
-        return redirect('/survey');
+            return redirect('/survey/list');
+        }
+   
+    }
 
+    public function viewResults( $surveyId , Request $request ){
        
+        $request->user()->authorizeRoles('admin');
+        $survey = $this->findById($surveyId);
+    
+         
+        $resultados = array();
+
+        foreach( $survey->sections as $section ){
+            
+            foreach( $section->questions as $question ){
+
+                foreach ( $question->answers as $answer ){
+                    
+
+                    $resultado = array(
+                        "question" => "$question->question",
+                        "resultado" => array(["answer" => "$answer->answer",
+                        "count" => "0"],)
+                        
+                    );
+
+                    $resultados[] = $resultado;
+
+
+                }
+            }
+        }
+        
+        
+
+        $resultado['resultado'][] = ["answer" => "otro",
+        "count" => "2"];
+        dd($resultado);
+
+        dd($resultados);
+
+
+        return view('surveys.resultsSurvey', [
+            'surveyName' => $survey->name,
+            'survey' => $survey,
+        ]);
     }
 
 }

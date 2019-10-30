@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Answer;
 use App\Http\Requests\CreateQuestionRequest;
 use App\Survey;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateSurveyRequest;
 use App\Http\Requests\CreateSectionRequest;
@@ -372,12 +373,18 @@ class SurveysController extends Controller
     
          
         $resultados = array();
+        $idRespuestas= array();
+
 
         foreach( $survey->sections as $section ){
             
             foreach( $section->questions as $question ){
 
                 foreach ( $question->answers as $answer ){
+                    
+                    
+                    $idRespuestas[] =  $answer->id;
+
                     
 
                     $resultado = array(
@@ -393,8 +400,47 @@ class SurveysController extends Controller
                 }
             }
         }
+
+       // dd($idRespuestas);
+
         
         
+        $users =  User::all();
+        //dd($idRespuestas);
+        $contadorRespuesta = array();
+
+
+
+        //Inicializacion de contadores
+        foreach( $users as $user ){
+
+            foreach( $user->answers as $answer ){
+                
+                $contadorRespuesta[$answer->id] = 0;
+            }
+            //dd($user->answers);
+        } 
+
+
+        //Conteo
+        foreach( $users as $user ){
+
+            foreach( $user->answers as $answer ){
+                  
+                if( $contadorRespuesta[$answer->id] == 0 ){
+                    $contadorRespuesta[$answer->id] = 1;
+                }
+                else{
+                    $contadorRespuesta[$answer->id] += 1;
+                }
+        
+            }
+            //dd($user->answers);
+       } 
+
+       dd($contadorRespuesta);
+
+        /*
 
         $resultado['resultado'][] = ["answer" => "otro",
         "count" => "2"];
@@ -407,6 +453,8 @@ class SurveysController extends Controller
             'surveyName' => $survey->name,
             'survey' => $survey,
         ]);
+        */
     }
+    
 
 }

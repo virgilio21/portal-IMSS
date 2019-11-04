@@ -436,8 +436,37 @@ class SurveysController extends Controller
         
             }
             //dd($user->answers);
-       } 
+       }
+       
+       
+       $data = array();
 
+
+       //Inicializacion de arreglo que contiene las preguntas
+       foreach( $contadorRespuesta as $key => $conteo ){
+
+        $answer = Answer::where('id', $key )->firstOrFail();
+        $data[$answer->question->question] = array();
+
+       }
+
+
+       
+
+       foreach( $data as $pregunta => $value ){
+
+        foreach( $contadorRespuesta as $id => $conteo ){
+            
+        }
+
+       }
+
+       $data[$answer->question->question];
+
+       
+
+       
+       //dd($data);
        dd($contadorRespuesta);
 
         /*

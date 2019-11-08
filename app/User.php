@@ -54,6 +54,13 @@ class User extends Authenticatable
     }
 
 
+    public function surveys(){
+        return $this->belongsToMany(Survey::class)->withPivot('status');
+    }
+
+
+
+    //ROLES
     public function hasAnyRole($roles){
 
         if (is_array($roles)) {

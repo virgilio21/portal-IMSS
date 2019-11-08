@@ -312,7 +312,8 @@ class SurveysController extends Controller
 
         $answers = $request->all();
         $Me = $request->user();
-                    
+        $survey = session('survey');
+        
 
 //      dd($answers);
         foreach( $answers as $key => $value ){
@@ -355,6 +356,11 @@ class SurveysController extends Controller
            }
         }
 
+
+        $Me->surveys()->attach($survey->id,['status'=>true]);
+        
+
+
         //Redireccion
         if( $Me->hasRole('admin') ){
             return redirect('/survey');
@@ -370,8 +376,13 @@ class SurveysController extends Controller
        
         $request->user()->authorizeRoles('admin');
         $survey = $this->findById($surveyId);
-    
-         
+        
+        $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
+
+        dd($users);
+
+        
+
         $resultados = array();
         $idRespuestas= array();
 

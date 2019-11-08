@@ -17,4 +17,9 @@ class Survey extends Model
         return $this->hasMany(Section::class)->orderBy('created_at', 'desc');
         
     }
+
+    public function users(){
+
+        return $this->belongsToMany(User::class)->withPivot('status');
+    }
 }

@@ -374,63 +374,42 @@ class SurveysController extends Controller
 
     public function viewResults( $surveyId , Request $request ){
        
+        //Solo admin esta autorizado
         $request->user()->authorizeRoles('admin');
+
+        //obtengo la encuesta
         $survey = $this->findById($surveyId);
         
+        //Usuarios que la contestaron
         $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
 
-        dd($users);
-
-        
-
-        $resultados = array();
-        $idRespuestas= array();
-
-
+    
+        //***Inicio obtencion de preguntas
+        $questions = array();
         foreach( $survey->sections as $section ){
-            
             foreach( $section->questions as $question ){
 
-                foreach ( $question->answers as $answer ){
-                    
-                    
-                    $idRespuestas[] =  $answer->id;
-
-                    
-
-                    $resultado = array(
-                        "question" => "$question->question",
-                        "resultado" => array(["answer" => "$answer->answer",
-                        "count" => "0"],)
-                        
-                    );
-
-                    $resultados[] = $resultado;
-
-
-                }
+                if( $question->typeQuestions != 'abierta' )
+                    $questions[] = $question;
             }
-        }
-
-       // dd($idRespuestas);
-
+        }//***Fin de obtencion de preguntas
         
-        
-        $users =  User::all();
-        //dd($idRespuestas);
+
+
+        //***Inicializacion de contadores
+        //Esta mal, necesito crear otro Join con un modelo para mi tabla intermedia y asi obtener solo las respuestas de los usuarios referentes a mi encuesta. Por que de esta forma tengo a mis usuarios que respondieron la encuesta pero puede que ellos hallan respondido otra encuesta y esto me traeria todos esos valores. No necesito todos solo los de mi encuesta a la que estoy evaluando.
         $contadorRespuesta = array();
 
-
-
-        //Inicializacion de contadores
         foreach( $users as $user ){
 
             foreach( $user->answers as $answer ){
                 
-                $contadorRespuesta[$answer->id] = 0;
-            }
-            //dd($user->answers);
-        } 
+                if( $answer->question->typeQuestions != 'abierta' )
+                    $contadorRespuesta[$answer->id] = 0;
+            }  
+        }
+        dd($contadorRespuesta);
+
 
 
         //Conteo
@@ -449,51 +428,11 @@ class SurveysController extends Controller
             //dd($user->answers);
        }
        
+    
+
+
+     
        
-       $data = array();
-
-
-       //Inicializacion de arreglo que contiene las preguntas
-       foreach( $contadorRespuesta as $key => $conteo ){
-
-        $answer = Answer::where('id', $key )->firstOrFail();
-        $data[$answer->question->question] = array();
-
-       }
-
-
-       
-
-       foreach( $data as $pregunta => $value ){
-
-        foreach( $contadorRespuesta as $id => $conteo ){
-            
-        }
-
-       }
-
-       $data[$answer->question->question];
-
-       
-
-       
-       //dd($data);
-       dd($contadorRespuesta);
-
-        /*
-
-        $resultado['resultado'][] = ["answer" => "otro",
-        "count" => "2"];
-        dd($resultado);
-
-        dd($resultados);
-
-
-        return view('surveys.resultsSurvey', [
-            'surveyName' => $survey->name,
-            'survey' => $survey,
-        ]);
-        */
     }
     
 

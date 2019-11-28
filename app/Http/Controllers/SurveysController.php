@@ -342,13 +342,17 @@ class SurveysController extends Controller
                         'question_id' => $questionId,
                     ]);
 
+                    $myAnswer->count = $myAnswer->count + 1;
+                    $myAnswer->save();
+
                     $Me->answers()->attach( $myAnswer->id );
 
                 }
                 elseif( str_contains( $key, 'Otro' ) != true ){
                     
                         $myAnswer = Answer::where( 'id', $value )->firstOrFail();
-                        
+                        $myAnswer->count = $myAnswer->count + 1;
+                        $myAnswer->save();
                         if( $myAnswer->answer != 'Otro' ){
                             $Me->answers()->attach( $myAnswer->id );
                         }
@@ -395,6 +399,9 @@ class SurveysController extends Controller
         }//***Fin de obtencion de preguntas
         
 
+        return view( 'surveys.resultsSurvey', [
+            'survey' => $survey
+        ]);
 
         //***Inicializacion de contadores
         //Esta mal, necesito crear otro Join con un modelo para mi tabla intermedia y asi obtener solo las respuestas de los usuarios referentes a mi encuesta. Por que de esta forma tengo a mis usuarios que respondieron la encuesta pero puede que ellos hallan respondido otra encuesta y esto me traeria todos esos valores. No necesito todos solo los de mi encuesta a la que estoy evaluando.

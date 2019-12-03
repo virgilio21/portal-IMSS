@@ -67,6 +67,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     //View Results
     Route::get('/survey/results/{id}', 'SurveysController@viewResults');
+
+    //Ver alumnos
+    Route::get('/users/list', 'SurveysController@listUsers');
+
+    Route::get('/answers/user/{id}', 'SurveysController@viewAnswersUser');
     
     
 });

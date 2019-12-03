@@ -384,10 +384,6 @@ class SurveysController extends Controller
         //obtengo la encuesta
         $survey = $this->findById($surveyId);
         
-        //Usuarios que la contestaron
-        $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
-
-    
         //***Inicio obtencion de preguntas
         $questions = array();
         foreach( $survey->sections as $section ){
@@ -399,48 +395,46 @@ class SurveysController extends Controller
         }//***Fin de obtencion de preguntas
         
 
+        session()->flash('survey', $survey);
+
         return view( 'surveys.resultsSurvey', [
-            'survey' => $survey
+            'surveyName' => $survey->name,
+            'surveyId' => $survey->id,
+            'questions' => $questions,
+        ]);   
+    }
+
+    public function listUsers( Request $request ){
+
+        $request->user()->authorizeRoles('admin');
+
+        //obtengo la encuesta
+        $survey = session('survey');
+        
+         //Usuarios que la contestaron
+         $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
+
+
+        session()->flash('survey', $survey);
+        return view('users.listUsers', [
+            'users' => $users
         ]);
 
-        //***Inicializacion de contadores
-        //Esta mal, necesito crear otro Join con un modelo para mi tabla intermedia y asi obtener solo las respuestas de los usuarios referentes a mi encuesta. Por que de esta forma tengo a mis usuarios que respondieron la encuesta pero puede que ellos hallan respondido otra encuesta y esto me traeria todos esos valores. No necesito todos solo los de mi encuesta a la que estoy evaluando.
-        $contadorRespuesta = array();
 
-        foreach( $users as $user ){
-
-            foreach( $user->answers as $answer ){
-                
-                if( $answer->question->typeQuestions != 'abierta' )
-                    $contadorRespuesta[$answer->id] = 0;
-            }  
-        }
-        dd($contadorRespuesta);
-
-
-
-        //Conteo
-        foreach( $users as $user ){
-
-            foreach( $user->answers as $answer ){
-                  
-                if( $contadorRespuesta[$answer->id] == 0 ){
-                    $contadorRespuesta[$answer->id] = 1;
-                }
-                else{
-                    $contadorRespuesta[$answer->id] += 1;
-                }
-        
-            }
-            //dd($user->answers);
-       }
-       
-    
-
-
-     
-       
     }
-    
 
+    public function viewAnswersUser(){
+
+        $survey = session('survey');
+
+        /* Codigo a implementar*/
+
+
+
+
+        session()->flash('survey', $survey);
+        return view( 'users.viewAnswersSurvey' ,[
+            'survey' => $survey,
+        ]);
+    }
 }

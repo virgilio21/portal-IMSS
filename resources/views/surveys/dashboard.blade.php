@@ -3,7 +3,7 @@
 
 @section('content')
     
-    <h1>Hola este es el dashboard</h1>
+    <h1 class="mb-4">Dashboard de encuestas.</h1>
 
     
     <form action="/survey/create" method="POST">
@@ -62,27 +62,37 @@
                     <div class="alert alert-primary" role="alert">
                         <a href="/survey/{{$survey->id}}" class="alert-link">{{$survey->name}} 
                         </a>
-                        <span class="text-muted">
-                            {{$survey->created_at}}
+                        <span class="text-muted mr-2">
+                            Creado:{{$survey->created_at}}
+                        </span>
+                        <span class="text-muted mr-1">
+                            Estado:@php 
+                                if($survey->visibility == 0){
+                                    echo('Oculto');
+                                }
+                                else {
+                                    echo('Running');
+                                }
+                            @endphp
                         </span>
                         
                     <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
                         <div class="text-muted card-text d-flex justify-content-around">
                             
-                            @if( $survey->visibility == 0 )
+                            @if( $survey->visibility == 1 )
                                 <form action="/survey/hidden/" method="POST">
                                 <input type="hidden" name="surveyId" value="{{$survey->id}}">
                                     {{ csrf_field() }}
-                                    <button class="btn btn-success">
-                                        Activar
+                                    <button class="btn btn-warning">
+                                        Ocultar
                                     </button>
                                 </form>
                             @else
                                 <form action="/survey/hidden/" method="POST">
                                 <input type="hidden" name="surveyId" value="{{$survey->id}}">
                                     {{ csrf_field() }}
-                                    <button class="btn btn-warning">
-                                        Hidden
+                                    <button class="btn btn-success">
+                                        Activar
                                     </button>
                                 </form>
 

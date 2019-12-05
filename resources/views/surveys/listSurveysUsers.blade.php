@@ -3,7 +3,7 @@
 
 @section('content')
     
-    <h1>Hola este es el dashboard</h1>
+    <h1>Lista de encuestas disponibles.</h1>
 
     <div class="row mt-4">
 

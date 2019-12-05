@@ -4,15 +4,28 @@
 @section('content')
  
     <h2 class="text-center mb-4">Usuarios que han contestado la encuesta.</h2>
-    <ul>
 
-        @foreach ( $users as $user )
+    <div class="row">
+
+
+
+        <div class="col-6">
+
+
         
-            <a href="/answers/user/{{$user->id}}"><li class="mb-2">{{$user->name}} {{$user->surnames}}</li></a>
+            <ul>
+                @foreach ( $users as $user )
+                    <li class="mb-2"><a href="/answers/user/{{$user->id}}">{{$user->surnames}} {{$user->name}}</a></li> 
 
-        @endforeach
-    
-    </ul>
+                    @if( $loop->iteration == $loop->count )
+                        <h5 class="mt-4">Total de usuarios que han respondido:{{$loop->count}}</h5>
+                    @endif
+                @endforeach
+            </ul>
+
+            
+        </div>
+    </div>
 
 
 @endsection

@@ -410,31 +410,63 @@ class SurveysController extends Controller
 
         //obtengo la encuesta
         $survey = session('survey');
-        
+        session()->flash('survey', $survey);
          //Usuarios que la contestaron
          $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
 
+      
+         $ordenados = $users->sortBy( 'surnames' )->all();
 
-        session()->flash('survey', $survey);
+        
         return view('users.listUsers', [
-            'users' => $users
+            'users' => $ordenados
         ]);
 
 
     }
 
-    public function viewAnswersUser(){
+    public function viewAnswersUser( $userId, Request $request ){
+
+        $request->user()->authorizeRoles('admin');
 
         $survey = session('survey');
 
-        /* Codigo a implementar*/
+
+        $Me = User::where( 'id', $userId )->firstOrFail();
+
+        $respuestas = $Me->answers;
+
+        $meAnswers = array();
+        foreach( $survey->sections as  $section ){
+
+            foreach( $section->questions as $question){
+
+                foreach( $question->answers as $answer){
+
+                    foreach( $respuestas as $respuesta ){
+
+                        if( $answer->id == $respuesta->id ){
+
+                            $meAnswers[] = $respuesta;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+       
+        
+    
 
 
 
 
         session()->flash('survey', $survey);
         return view( 'users.viewAnswersSurvey' ,[
-            'survey' => $survey,
+            'surveyName' => $survey->name,
+            'userName' => $Me->surnames.' '.$Me->name,
+            'answers' => $meAnswers,
         ]);
     }
 }

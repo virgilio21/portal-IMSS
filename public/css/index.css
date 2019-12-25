@@ -1,0 +1,125 @@
+/**, *::before, *::after{
+    box-sizing: border-box !important;
+}
+*/
+
+header img{
+    width: 80px;
+}
+
+.text-importante{
+
+    color: #97c93e !important;
+}
+
+
+#carousel{
+
+    position: relative;
+}
+
+#carousel .overlay{
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba( 0, 0, 0, 0.1);
+    color:white;
+}
+
+#section-carousel{
+    margin-top: -24px;
+}
+
+section#section-carousel img{
+    
+    /*El 70% del alto de la pantalla*/
+    max-height: 70vh;
+    /*Nos permite mantener la relacion altura anchura de una imagen haciendo un zoom*/
+    object-fit: cover;
+    /*
+    
+    Valores:
+    fill- Esto es por defecto. El contenido reemplazado está dimensionado para llenar el cuadro de contenido del elemento. Si es necesario, el objeto se estirará o aplastará para ajustarse
+
+    contain - El contenido reemplazado se escala para mantener su relación de aspecto mientras se ajusta dentro del cuadro de contenido del elemento
+
+    cover- El contenido reemplazado está dimensionado para mantener su relación de aspecto mientras llena el cuadro de contenido completo del elemento. El objeto se recortará para que quepa
+
+    none - El contenido reemplazado no se redimensiona
+
+    scale-down - El contenido se clasifica como si no se especificara ninguno o contenga (daría como resultado un tamaño de objeto concreto más pequeño)
+*/
+    /*Filtro para imagenes en escala de girses*/
+}
+
+.overlay .container,
+.container .row{
+
+    height: 100%;
+}
+
+.btn-my-color{
+
+    background-color: #02A8A8;
+    color:white;
+}
+
+#placeAndTime{
+
+    background-color: #343a40;
+    color: white;
+}
+#placeAndTime img {
+    max-width: 100%;
+}
+
+#footer{
+
+    background: linear-gradient( 90deg, #1c3643, #273b47 25%, #1e5372 );
+
+}
+
+#footer a{
+
+    color:white;
+}
+
+
+div.fondoEducativo{
+    background-color: #02A8A8;
+    color: white;
+}
+div.col-md-4{
+    padding-top: 30px !important;
+    padding-bottom: 10px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+}
+
+div.borde-dashed{
+    border-right-style: dashed !important;
+    border-right-width: 2px  !important;
+}
+
+
+
+img.instalacion{
+    width: 80%;
+    border-radius: 10px;
+    filter: grayscale(50%);
+    transition: .5s;
+}
+
+img.instalacion:hover{
+    width: 90%;
+    filter: grayscale(0%);   
+}
+
+div.componer{
+    padding: 0;
+    margin: 0;
+}

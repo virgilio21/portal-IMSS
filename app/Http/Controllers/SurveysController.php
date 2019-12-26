@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Answer;
@@ -7,6 +6,9 @@ use App\Http\Requests\CreateQuestionRequest;
 use App\Survey;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\CreateSurveyRequest;
 use App\Http\Requests\CreateSectionRequest;
 use App\Http\Requests\CreateAnswerRequest;
@@ -14,6 +16,7 @@ use App\Http\Requests\UpdateSurveyRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Question;
 use App\Section;
+
 
 class SurveysController extends Controller
 {
@@ -47,6 +50,7 @@ class SurveysController extends Controller
 
     public function show( $surveyId, Request $request ){
 
+        $surveyId = decrypt($surveyId);
         $request->user()->authorizeRoles('admin');
         $survey = $this->findById($surveyId);
 
@@ -283,15 +287,48 @@ class SurveysController extends Controller
         ]);
     }
 
-    public function listSurveys(){
+    public function listSurveys( Request $request ){
 
-        $surveys = Survey::latest()->paginate(4);
+        $surveys = Survey::all();
 
+        //dd($surveys);
+        $me = $request->user();
+        
+        $surveysClear = $me->surveys;
 
+      
+        $encuestas = array();
+        $ids = array();
+
+        foreach( $surveys as $survey ){
+            
+            foreach( $surveysClear as $surveyClear ){
+                 
+                if( $survey->id == $surveyClear->id ){
+
+                    $ids[$survey->id] = $survey->id; 
+                }
+                   
+            }
+            $encuestas[$survey->id] = $survey;  
+        }
+
+        
+        
+        
+        foreach( $ids as $id ){
+
+            unset($encuestas[$id]);
+        }
+
+        
+        $surveysPaginate = $this->paginate( $encuestas, 2, null);
+        //dd($surveysPaginate);
         return view('surveys.listSurveysUsers', [
 
-            'surveys' => $surveys,
+            'surveys' => $surveysPaginate,
         ]);
+
     }
 
 
@@ -469,4 +506,23 @@ class SurveysController extends Controller
             'answers' => $meAnswers,
         ]);
     }
+
+
+
+    private function paginate($items, $perPage, $page = null){
+        $pageName = 'page';
+        $page     = $page ?: (Paginator::resolveCurrentPage($pageName) ?: 1);
+        $items    = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage)->values(),
+            $items->count(),
+            $perPage,
+            $page,
+            [
+                'path'     => Paginator::resolveCurrentPath(),
+                'pageName' => $pageName,
+            ]
+        );
+    }
 }
+

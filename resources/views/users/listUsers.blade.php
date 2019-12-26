@@ -15,7 +15,7 @@
         
             <ul>
                 @foreach ( $users as $user )
-                    <li class="mb-2"><a href="/answers/user/{{$user->id}}">{{$user->surnames}} {{$user->name}}</a></li> 
+                    <li class="mb-2"><a href="/answers/user/{{$user->id}}"><span class="list">{{$user->surnames}}</span>  {{$user->name}}</a></li> 
 
                     @if( $loop->iteration == $loop->count )
                         <h5 class="mt-4">Total de usuarios que han respondido:{{$loop->count}}</h5>

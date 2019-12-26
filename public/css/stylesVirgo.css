@@ -9,3 +9,7 @@ p.question{
 canvas{
     margin-bottom: 50px;
 }
+.list{
+    font-size: large;
+    color: black;
+}

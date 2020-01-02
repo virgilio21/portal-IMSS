@@ -41,14 +41,16 @@
                             
                             @if( $question->typeQuestions == "cerradaMasOtro" )
 
-                                <div class="form-check-inline">
-                                
-                                <label class="form-check-label" for="radio{{$answer->id}}">
-                                <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
-                                @if($answer->answer == 'Otro')
-                                <input type="text" name="optradio{{$question->id}}Otro" >
-                                @endif  
-                                </div>
+                                @if( $answer->visibility == true )
+                                    <div class="form-check-inline">
+                                    
+                                    <label class="form-check-label" for="radio{{$answer->id}}">
+                                    <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
+                                    @if($answer->answer == 'Otro')
+                                    <input type="text" name="optradio{{$question->id}}Otro" >
+                                    @endif  
+                                    </div>
+                                @endif
                             @elseif( $question->typeQuestions != 'abierta' )
                                 <div class="form-check-inline">
                                 <label class="form-check-label" for="radio{{$answer->id}}">

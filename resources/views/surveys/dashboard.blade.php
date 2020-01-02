@@ -96,7 +96,7 @@
                                     </button>
                                 </form>
 
-                                <a href="/survey/results/{{$survey->id}}" class="btn btn-primary">Ver resultados</a>
+                                <a href="/survey/results/{{encrypt($survey->id)}}" class="btn btn-primary">Ver resultados</a>
                             @endif
                             
                         </div>

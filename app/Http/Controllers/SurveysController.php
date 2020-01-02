@@ -428,6 +428,7 @@ class SurveysController extends Controller
         $request->user()->authorizeRoles('admin');
 
         //obtengo la encuesta
+        $surveyId = decrypt( $surveyId );
         $survey = $this->findById($surveyId);
         
         //***Inicio obtencion de preguntas
@@ -474,7 +475,7 @@ class SurveysController extends Controller
     public function viewAnswersUser( $userId, Request $request ){
 
         $request->user()->authorizeRoles('admin');
-
+        $userId = decrypt( $userId );
         $survey = session('survey');
 
 

@@ -3,13 +3,23 @@
 
 @section('content')
 
-
+    <style>
+    
+    
+        canvas.tamanio{
+            
+           
+            height:100vh !important;
+            
+        }
+    
+    </style>
 
     <script src="{{ asset('js/chartjs.js') }}" defer></script>
 
     <h1 class="mb-4 text-center">Encuesta: {{$surveyName}}</h1>
     @foreach ( $questions as $question )
-        <canvas id="myChart{{$loop->iteration}}" width="200px" height="200px"></canvas>
+        <canvas id="myChart{{$loop->iteration}}" class="tamanio"></canvas>
     @endforeach
         
         
@@ -22,7 +32,9 @@
             $opcionesRespuestas = array();
             foreach ( $question->answers as $answer ) {
                 
+                if( $answer->visibility == true ){
                 $opcionesRespuestas[] = $answer->answer;
+                }
             }
 
             $opcionesRespuestasContadas = array();

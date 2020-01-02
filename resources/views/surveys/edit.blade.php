@@ -44,7 +44,7 @@
                                         {{$loop->iteration}}. {{$answer->answer}}
                                         
                                     @elseif( $answer->question->typeQuestions == 'abierta' )
-                                        {{$loop->iteration}}. {{$answer->answer}}
+                                        
                             
                                     
                                     @else

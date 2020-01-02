@@ -151,6 +151,7 @@ class SurveysController extends Controller
 
         Answer::create([
             'answer' => $request->input('answer'),
+            'visibility'=> true,
             'question_id' => $request->input('questionId'),
         ]);
 

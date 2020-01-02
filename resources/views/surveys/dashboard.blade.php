@@ -60,7 +60,7 @@
                     
                     
                     <div class="alert alert-primary" role="alert">
-                        <a href="/survey/{{encrypt($survey->id)}}" class="alert-link">{{$survey->name}} 
+                        <a href="/survey/{{encrypt($survey->id)}}" class="alert-link mr-1">{{$survey->name}} 
                         </a>
                         <span class="text-muted mr-2">
                             Creado:{{$survey->created_at}}

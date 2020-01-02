@@ -30,12 +30,6 @@
 
 
                                     <input id="sectionName" type="hidden" class="form-control" name="sectionName" required>
-
-                                    
-                                    
-    
-                                    
-                                    
                                     
                                 </div>
                         </div>

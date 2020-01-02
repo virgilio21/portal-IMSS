@@ -5,8 +5,8 @@
 @section('content')
     
     
-<a href="#" class="mb-4" data-toggle="modal" data-target="#editSurvey" onclick="recibirValue( 'nameSurvey','{{$survey->name}}', 'surveyId','{{$survey->id}}' );"><h1>{{$survey->name}}</h1></a>
-<a href="/survey/{{$survey->id}}" >Regresar a la vista de creación.</a>
+<a href="#" class="mb-4" data-toggle="modal" data-target="#editSurvey" onclick="recibirValue( 'nameSurvey','{{$survey->name}}', 'surveyId','{{$survey->id}}' );"><h1>Nombre: {{$survey->name}}</h1></a>
+<a href="/survey/{{encrypt($survey->id)}}" >Regresar a la vista de creación.</a>
 
 
 

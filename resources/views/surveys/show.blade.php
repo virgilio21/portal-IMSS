@@ -6,7 +6,7 @@
     
     
     <h1>{{$survey->name}}</h1>
-    <a href="/survey/edit/{{$survey->id}}">Ir a la vista de edición.</a>
+    <a href="/survey/edit/{{encrypt($survey->id)}}">Ir a la vista de edición.</a>
 
     <div class="row">
 

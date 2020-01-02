@@ -62,7 +62,7 @@ class SurveysController extends Controller
 
     }
 
-    public function createSection(CreateSectionRequest $request){
+    public function createSection( CreateSectionRequest $request ){
 
         $request->user()->authorizeRoles('admin');
         $survey = session('survey');
@@ -146,7 +146,7 @@ class SurveysController extends Controller
             ]);
         }
 
-        return redirect('/survey/'.$survey->id);
+        return redirect('/survey/'.encrypt($survey->id));
 
         
     }
@@ -162,7 +162,7 @@ class SurveysController extends Controller
             'question_id' => $request->input('questionId'),
         ]);
 
-        return redirect('/survey/'.$survey->id);
+        return redirect('/survey/'.encrypt($survey->id));
 
 
 
@@ -178,6 +178,7 @@ class SurveysController extends Controller
 
     public function editSurvey( $surveyId , Request $request ){
 
+        $surveyId = decrypt($surveyId);
         $request->user()->authorizeRoles('admin');
         $survey = $this->findById($surveyId);
 
@@ -204,7 +205,7 @@ class SurveysController extends Controller
 
         $survey = session('survey');
 
-        return redirect('/survey/edit/'.$survey->id);
+        return redirect('/survey/edit/'.encrypt($survey->id));
 
 
     }
@@ -220,7 +221,7 @@ class SurveysController extends Controller
 
         $survey = session('survey');
 
-        return redirect('/survey/edit/'.$survey->id);
+        return redirect('/survey/edit/'.encrypt($survey->id));
 
     }
 
@@ -235,7 +236,7 @@ class SurveysController extends Controller
 
         $survey = session('survey');
 
-        return redirect('/survey/edit/'.$survey->id);
+        return redirect('/survey/edit/'.encrypt($survey->id));
     }
 
     public function updateAnswer ( CreateAnswerRequest $request ){
@@ -249,7 +250,7 @@ class SurveysController extends Controller
 
         $survey = session('survey');
 
-        return redirect('/survey/edit/'.$survey->id);
+        return redirect('/survey/edit/'.encrypt($survey->id));
 
     }
 
@@ -265,7 +266,7 @@ class SurveysController extends Controller
             $deleteItem->delete();
             
 
-            return redirect('/survey/edit/'.$survey->id);
+            return redirect('/survey/edit/'.encrypt($survey->id));
 
         }
         elseif( $type == 'question' ){
@@ -280,7 +281,7 @@ class SurveysController extends Controller
 
 
 
-        return redirect('/survey/edit/'.$survey->id);
+        return redirect('/survey/edit/'.encrypt($survey->id));
     }
 
     public function showFormUsers( $id, Request $request){

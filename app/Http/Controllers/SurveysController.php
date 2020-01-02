@@ -75,7 +75,7 @@ class SurveysController extends Controller
         ]);
 
 
-        return redirect('/survey/'.$survey->id);
+        return redirect('/survey/'.encrypt($survey->id));
     }
 
     public function createQuestion(CreateQuestionRequest $request){
@@ -98,26 +98,31 @@ class SurveysController extends Controller
 
             Answer::create([
                 'answer' => 'Muy satisfecho',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
 
             Answer::create([
                 'answer' => 'Satisfecho',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
 
             Answer::create([
                 'answer' => 'Ni satisfecho, ni insatisfecho',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
 
             Answer::create([
                 'answer' => 'Insatisfecho',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
 
             Answer::create([
                 'answer' => 'Muy insatisfecho',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
         }
@@ -127,6 +132,7 @@ class SurveysController extends Controller
             Answer::create([
 
                 'answer' => 'Otro',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
         }
@@ -135,6 +141,7 @@ class SurveysController extends Controller
 
             Answer::create([
                 'answer' => 'Esta es una pregunta abierta',
+                'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);
         }

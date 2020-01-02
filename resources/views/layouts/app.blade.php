@@ -96,6 +96,4 @@
         </main>
     </div>
 </body>
-
-
 </html>

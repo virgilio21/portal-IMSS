@@ -79,7 +79,7 @@
             
 
         @if($survey->sections->isEmpty())
-            <h4>No hay nada que responder.</h4>
+            <h4>Esta encuesta esta vacia.</h4>
         @else
             @if( Auth::user()->hasRole('teacher') or Auth::user()->hasRole('user') )
                 <button type="submit" class="btn btn-success mt-4">Guardar</button>

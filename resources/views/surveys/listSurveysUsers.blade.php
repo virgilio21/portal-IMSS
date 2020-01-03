@@ -12,26 +12,9 @@
             !!!!La primera parte se ejecuta si el array tiene datos y por conseguiente el emply se ejecuta si no hay datos en el arreglo
             -->
             @forelse ($surveys as $survey)
-                @if( (Auth::user()->hasRole('user')) And (($survey->access == 'alumnos') Or ($survey->access == 'ambos')) )
-
-                    @if( $survey->visibility == 1 )
-                    <div class="col-6">    
-                        
-                        <div class="alert alert-primary" role="alert">
-                            <a href="/survey/response/{{$survey->id}}" class="alert-link">{{$survey->name}} 
-                            </a>
-                            <div class="text-muted card-text">
-                                {{$survey->created_at}}
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                    @endif
                 
-                    @elseif( (Auth::user()->hasRole('teacher')) And (($survey->access == 'maestros') Or ($survey->access == 'ambos')) )
 
-                    @if( $survey->visibility ==  1 )
+                    
                     <div class="col-6">    
                         
                         <div class="alert alert-primary" role="alert">
@@ -44,10 +27,9 @@
                         
                         
                     </div>
-                    @endif
-                @endif
+                   
             @empty
-                <p>No hay nuevos mensajes</p>
+                <p>No hay nuevas encuestas</p>
                 
             @endforelse
     

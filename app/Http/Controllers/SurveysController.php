@@ -330,8 +330,35 @@ class SurveysController extends Controller
             unset($encuestas[$id]);
         }
 
+        $misEncuestas = array();
+
+
+        foreach( $encuestas as $encuesta ){
+
+            if( $me->hasRole('user') and (($encuesta->access == 'alumnos') Or ($encuesta->access == 'ambos'))){
+
+                if( $encuesta->visibility == 1){
+
+                    $misEncuestas[] = $encuesta;
+                    continue;
+                    
+                }
+
+            }elseif( $me->hasRole('teacher') and (($encuesta->access == 'maestros') Or ($encuesta->access == 'ambos'))){
+
+                if( $encuesta->visibility == 1){
+
+                    $misEncuestas[] = $encuesta;
+                    continue;
+
+                }
+
+            }
+
+        }
+
         
-        $surveysPaginate = $this->paginate( $encuestas, 2, null);
+        $surveysPaginate = $this->paginate( $misEncuestas, 6, null);
         //dd($surveysPaginate);
         return view('surveys.listSurveysUsers', [
 

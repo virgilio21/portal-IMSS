@@ -45,9 +45,11 @@
                                     <div class="form-check-inline">
                                     
                                     <label class="form-check-label" for="radio{{$answer->id}}">
-                                    <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
+
+                                    <input type="radio" class="form-check-input" id="radio{{$answer->id}}" onclick="desbloqueo('{{$answer->answer}}', '{{$question->id}}')" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
+
                                     @if($answer->answer == 'Otro')
-                                    <input type="text" name="optradio{{$question->id}}Otro" >
+                                    <input type="text" name="optradio{{$question->id}}Otro"  id="textOtro{{$question->id}}" disabled/>    
                                     @endif  
                                     </div>
                                 @endif
@@ -99,7 +101,29 @@
 
     <script>
     
-    
+        function desbloqueo( Mirespuesta, questionId){
+
+
+            let inputText = document.getElementById( 'textOtro'+ questionId );
+
+            console.log(inputText);
+            
+            if( inputText != undefined ){
+
+                if( Mirespuesta === 'Otro' ){
+
+                    inputText.removeAttribute( "disabled" );
+                    inputText.focus();
+
+                }else{
+
+                    inputText.setAttribute( "disabled","");
+
+                }
+            }
+
+            
+        }
        
     </script>
 

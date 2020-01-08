@@ -360,7 +360,7 @@ class SurveysController extends Controller
         
         $surveysPaginate = $this->paginate( $misEncuestas, 6, null);
         //dd($surveysPaginate);
-        return view('surveys.listSurveysUsers', [
+        return view('surveys.listSurveys', [
 
             'surveys' => $surveysPaginate,
         ]);

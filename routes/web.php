@@ -24,10 +24,13 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/survey/list', 'SurveysController@listSurveys');
+    
 
 });
 
 Route::group(['middleware' => 'auth'], function(){
+
+    
 
     Route::get('/survey', 'SurveysController@home');
     Route::post('/survey/create', 'SurveysController@create');
@@ -72,6 +75,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/list', 'SurveysController@listUsers');
 
     Route::get('/answers/user/{id}', 'SurveysController@viewAnswersUser');
+    
     
     
 });

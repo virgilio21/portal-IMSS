@@ -56,7 +56,7 @@
             !!!!La primera parte se ejecuta si el array tiene datos y por conseguiente el emply se ejecuta si no hay datos en el arreglo
             -->
             @forelse ($surveys as $survey)
-                <div class="col-6">
+                <div class="col-md-6 col-12">
                     
                     
                     <div class="alert alert-primary" role="alert">

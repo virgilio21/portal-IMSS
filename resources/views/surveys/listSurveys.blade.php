@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
-
 @section('content')
 
-    
+    <h1 class="text-center">Lista de encuestas disponibles</h1>
     <div class="row">
-
-        <h1 class="text-center">Lista de encuessstas disponibles.</h1>
         @if(Session::has('mensaje'))
         <div class="col-12" >
             <div class="alert alert-success alert-dismissible" role="alert">

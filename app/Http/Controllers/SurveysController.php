@@ -443,7 +443,7 @@ class SurveysController extends Controller
             return redirect('/survey');
         }
         else{
-
+            session()->flash('mensaje', "Se ha contestado correctamente la encuesta");
             return redirect('/survey/list');
         }
    
@@ -491,7 +491,7 @@ class SurveysController extends Controller
       
          $ordenados = $users->sortBy( 'surnames' )->all();
 
-        
+        $mensaje = session('mensaje');
         return view('users.listUsers', [
             'users' => $ordenados
         ]);

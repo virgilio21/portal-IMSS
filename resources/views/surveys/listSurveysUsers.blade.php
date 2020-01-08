@@ -2,10 +2,24 @@
 
 
 @section('content')
+
     
-    <h1>Lista de encuestas disponibles.</h1>
+    <div class="row">
+
+        <h1 class="text-center">Lista de encuessstas disponibles.</h1>
+        @if(Session::has('mensaje'))
+        <div class="col-12" >
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('mensaje')}}
+            </div>
+        </div>
+        @endif
+    </div>
 
     <div class="row mt-4">
+
+       
 
         
             <!--Un else foreach es como un if else, el forelse es if y el emply es else
@@ -13,10 +27,7 @@
             -->
             @forelse ($surveys as $survey)
                 
-
-                    
-                    <div class="col-6">    
-                        
+                    <div class="col-12 col-md-6">    
                         <div class="alert alert-primary" role="alert">
                             <a href="/survey/response/{{$survey->id}}" class="alert-link">{{$survey->name}} 
                             </a>
@@ -24,19 +35,16 @@
                                 {{$survey->created_at}}
                             </div>
                         </div>
-                        
-                        
                     </div>
                    
             @empty
-                <p>No hay nuevas encuestas</p>
-                
+                <p>No hay encuestas disponibles</p>
             @endforelse
     
             <!--Si aun hay mensajes se crearan otras paginas y laravel agregara un parametro a las rutas-->
     
             
-        </div>
+    </div>
     
         <div class="row">
             @if(count($surveys))

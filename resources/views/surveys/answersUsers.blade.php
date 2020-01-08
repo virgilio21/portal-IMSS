@@ -5,14 +5,14 @@
 @section('content')
     
     
-    <h1 class="text-danger">{{$survey->name}}</h1>
+    <h1 class="text-center">{{$survey->name}}</h1>
     
     <form action="/survey/send/answers" method="POST"> 
         {{ csrf_field() }}
         <div class="row">
             <div class="col-12">
                     @foreach ($survey->sections as $section)
-                        <h2 class="card-text mt-4 text-success">
+                        <h2 class="card-text mt-4 text-primary">
                         {{$section->name}}
                         </h2>
                         <div class="text-muted card-text mb-2">

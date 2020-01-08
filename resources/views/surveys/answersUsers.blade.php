@@ -6,7 +6,7 @@
     
     
     <h1 class="text-center">{{$survey->name}}</h1>
-    
+    <h2>Hola mundo</h2>
     <form action="/survey/send/answers" method="POST"> 
         {{ csrf_field() }}
         <div class="row">
@@ -30,7 +30,7 @@
                             @if( $question->typeQuestions == "abierta")
 
                                 <div class="form-group">
-                                <textarea name="abierta{{$question->id}}" id="" cols="70" rows="5"></textarea>
+                                <textarea name="abierta{{$question->id}}" id="" class="form-check-input" cols="80" rows="5"></textarea>
                                 </div>
                             @endif
 
@@ -46,20 +46,19 @@
                                     
                                     <label class="form-check-label" for="radio{{$answer->id}}">
 
-                                    <input type="radio" class="form-check-input" id="radio{{$answer->id}}" onclick="desbloqueo('{{$answer->answer}}', '{{$question->id}}')" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
+                                    <input type="radio" class="form-check-input mb-3" id="radio{{$answer->id}}" onclick="desbloqueo('{{$answer->answer}}', '{{$question->id}}')" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}}
 
                                     @if($answer->answer == 'Otro')
-                                    <input type="text" name="optradio{{$question->id}}Otro"  id="textOtro{{$question->id}}" disabled/>    
+                                    <input type="text" class="mb-3" name="optradio{{$question->id}}Otro"  id="textOtro{{$question->id}}" disabled/>    
                                     @endif  
                                     </div>
                                 @endif
                             @elseif( $question->typeQuestions != 'abierta' )
                                 <div class="form-check-inline">
                                 <label class="form-check-label" for="radio{{$answer->id}}">
-                                <input type="radio" class="form-check-input" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}} 
+                                <input type="radio" class="form-check-input mb-3" id="radio{{$answer->id}}" name="optradio{{$question->id}}" value="{{$answer->id}}" >{{$answer->answer}} 
                                 </div>
-                            
-                                
+                              
                             @endif
 
                             

@@ -25,11 +25,12 @@
             @forelse ($surveys as $survey)
                 
                     <div class="col-12 col-md-6">    
-                        <div class="alert alert-primary" role="alert">
-                            <a href="/survey/response/{{$survey->id}}" class="alert-link">{{$survey->name}} 
+                        <div class="alert alert-primary caja" role="alert">
+                            <a href="/survey/response/{{$survey->id}}" class="alert-link text-center">{{$survey->name}} 
                             </a>
-                            <div class="text-muted card-text">
-                                {{$survey->created_at}}
+                            <div class="text-muted card-text d-flex justify-content-between">
+                                <span>Creado: {{$survey->created_at}}</span>
+                                <span>Actualizado: {{$survey->updated_at}}</span>
                             </div>
                         </div>
                     </div>
@@ -50,5 +51,17 @@
                 </div>
             @endif
         </div>
+
+    <script>
+    
+        $(document).ready(function(){
+
+            $(".caja").click(function(){
+            window.location = $(this).find("a:first").attr("href");
+
+        });
+
+        });
+    </script>
 
 @endsection

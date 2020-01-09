@@ -13,3 +13,31 @@ canvas{
     font-size: large;
     color: black;
 }
+
+textarea.movil{
+    width: 50%;
+    height: 125px;
+}
+
+input.radio{
+    
+    width: 16px;
+    height: 16px;
+}
+
+.caja{ 
+    cursor:pointer; 
+}
+
+.caja a{ 
+    display:block;
+}
+
+@media screen and (max-width:414px){
+
+    textarea.movil{
+        width: 95%;
+        height: 115px;
+    }
+
+}

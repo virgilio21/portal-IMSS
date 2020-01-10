@@ -4,6 +4,17 @@
 @section('content')
     
     <h1 class="mb-4">Dashboard de encuestas.</h1>
+    <div class="row">
+        @if(Session::has('error'))
+        <div class="col-12" >
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('error')}}
+            </div>
+        </div>
+        @endif
+    </div>
+
 
     
     <form action="/survey/create" method="POST">
@@ -77,7 +88,7 @@
                         </span>
                         
                     <a href="/survey/response/{{$survey->id}}">Ver formulario</a>
-                        <div class="text-muted card-text d-flex justify-content-around">
+                        <div class="text-muted card-text d-flex justify-content-around mt-3">
                             
                             @if( $survey->visibility == 1 )
                                 <form action="/survey/hidden/" method="POST">
@@ -97,6 +108,10 @@
                                 </form>
 
                                 <a href="/survey/results/{{encrypt($survey->id)}}" class="btn btn-primary">Ver resultados</a>
+
+                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#removeSurvey" onclick="deleteSurvey('itemId', '{{$survey->id}}')">Eliminar</a>
+
+
                             @endif
                             
                         </div>
@@ -121,6 +136,9 @@
                 </div>
             @endif
         </div>
+
+        @include('layouts.deleteSurvey')
+        <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>
 
         
 @endsection

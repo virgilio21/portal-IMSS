@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function(){
     //remove
     
     Route::post('/survey/remove/item', 'SurveysController@deleteItem');
+    Route::post('survey/delete/all', 'SurveysController@deleteSurvey');
 
     //response answers users
     

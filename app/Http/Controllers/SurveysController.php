@@ -62,6 +62,24 @@ class SurveysController extends Controller
 
     }
 
+    public function deleteSurvey( Request $request ){
+
+        $request->user()->authorizeRoles('admin');
+
+        $error = session('error');
+        $id = $request->input('itemId');
+
+        $mySurvey = $this->findById( $id );
+        try{
+            $mySurvey->delete();
+        }catch( QueryException $error ){
+            
+            session()->flash('error', "No se puede eliminar la encuesta, algun usuario ya la ha contestado, le recomendamos ocultarla y crear otra si asi lo requiere");
+        }
+        return redirect('/survey');
+        
+    }
+
     public function createSection( CreateSectionRequest $request ){
 
         $request->user()->authorizeRoles('admin');
@@ -94,8 +112,6 @@ class SurveysController extends Controller
 
         if( $myQuestion->typeQuestions == 'cerradaDefault' ){
             
-            $request->user()->authorizeRoles('admin');
-
             Answer::create([
                 'answer' => 'Muy satisfecho',
                 'visibility' => true,
@@ -132,15 +148,6 @@ class SurveysController extends Controller
             Answer::create([
 
                 'answer' => 'Otro',
-                'visibility' => true,
-                'question_id' => $myQuestion->id,
-            ]);
-        }
-
-        if ( $myQuestion->typeQuestions == "abierta"){
-
-            Answer::create([
-                'answer' => 'Esta es una pregunta abierta',
                 'visibility' => true,
                 'question_id' => $myQuestion->id,
             ]);

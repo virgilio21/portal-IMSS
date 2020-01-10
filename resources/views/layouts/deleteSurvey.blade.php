@@ -1,9 +1,9 @@
-<form action="/survey/remove/item" method="POST" id="form-remove">
-    <div class="modal fade" id="removeItem" role="dialog">
+<form action="/survey/delete/all" method="POST" id="form-remove">
+    <div class="modal fade" id="removeSurvey" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">¿Estas seguro que quieres eliminar este elemento?</h5>
+                            <h5 class="modal-title">¿Estas seguro que quieres eliminar esta encuesta?</h5>
                             <button type="button" class="close btn-cerrar" data-dismiss="modal" aria-label="Close">
                                 <span>&times;</span>
                             </button>
@@ -17,12 +17,8 @@
                                             
                                                 {{ csrf_field() }}
                                             
-                                            <p class="text-white bg-danger font-italic question">Nota: Todos los elementos que dependen de este tambien seran eliminados. Si alguien ya ha contestado esta encuesta no podra borrarla y tendra un error.</p>
-                                            <input id="itemId" type="hidden" class="form-control" name="itemId" required>
-
-                                            <input id="itemType" type="hidden" class="form-control" name="itemType" required>
-    
-                                            
+                                            <p class="text-white bg-danger font-italic question">Nota:Solo podras eliminar esta encuesta si aun no ha sido contestado por un usuario. De lo contrario saldra un error.</p>
+                                            <input id="itemId" type="text" class="form-control" name="itemId" required>                                            
                                         </div>
                                 </div>
     
@@ -42,19 +38,5 @@
     </form>
     
     
-    <script>
-        $(document).ready(function(){
     
-           
-    
-            //Vaciar el campo de la pregunta cuando se presiona el boton close o el boton de la parte superior derecha
-            $('.btn-cerrar').on("click", function(event){
-                event.preventDefault();
-                $('#form-remove').trigger("reset");
-            });
-    
-            
-        });
-    
-    </script>
     

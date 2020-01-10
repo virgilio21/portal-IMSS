@@ -68,14 +68,22 @@ class SurveysController extends Controller
 
         $error = session('error');
         $id = $request->input('itemId');
+        $survey = $this->findById( $id );
 
-        $mySurvey = $this->findById( $id );
-        try{
-            $mySurvey->delete();
-        }catch( QueryException $error ){
-            
-            session()->flash('error', "No se puede eliminar la encuesta, algun usuario ya la ha contestado, le recomendamos ocultarla y crear otra si asi lo requiere");
+        $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
+
+        
+        
+        if( count($users) ){
+            session()->flash('error', "No se puede eliminar la encuesta, algun usuario ya la ha contestado, le recomendamos dejarla oculta y crear otra si asi lo requiere");
         }
+        else{
+
+            $survey->delete();
+        }
+        
+
+        
         return redirect('/survey');
         
     }
@@ -294,13 +302,13 @@ class SurveysController extends Controller
     public function showFormUsers( $id, Request $request){
 
        
-        $survey = $this->findById($id);
+        $survey = $this->findById( decrypt($id) );
 
         session()->flash('survey', $survey);
         
         return view( 'surveys.answersUsers', [
             'survey' => $survey,
-        ]);
+        ] );
     }
 
     public function listSurveys( Request $request ){
@@ -496,7 +504,7 @@ class SurveysController extends Controller
          $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
 
       
-         $ordenados = $users->sortBy( 'surnames' )->all();
+        $ordenados = $users->sortBy( 'surnames' )->all();
 
         $mensaje = session('mensaje');
         return view('users.listUsers', [

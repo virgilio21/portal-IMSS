@@ -4,7 +4,13 @@
 
 @section('content')
     
-    
+<div class="col-12" >
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Realizar cambios cuando un alumno ya ha contestado la encuesta puede afectar a la interpretacion de los resultados. 
+    </div>
+</div>
+
 <a href="#" class="mb-4" data-toggle="modal" data-target="#editSurvey" onclick="recibirValue( 'nameSurvey','{{$survey->name}}', 'surveyId','{{$survey->id}}' );"><h1>Nombre: {{$survey->name}}</h1></a>
 <a href="/survey/{{encrypt($survey->id)}}" >Regresar a la vista de creación.</a>
 

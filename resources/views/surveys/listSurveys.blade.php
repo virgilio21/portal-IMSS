@@ -26,7 +26,7 @@
                 
                     <div class="col-12 col-md-6">    
                         <div class="alert alert-primary caja" role="alert">
-                            <a href="/survey/response/{{$survey->id}}" class="alert-link text-center">{{$survey->name}} 
+                            <a href="/survey/response/{{encrypt($survey->id)}}" class="alert-link text-center">{{$survey->name}} 
                             </a>
                             <div class="text-muted card-text d-flex justify-content-between">
                                 <span>Creado: {{$survey->created_at}}</span>

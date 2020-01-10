@@ -30,8 +30,8 @@
     
                         </div>
                         <div class="modal-footer">
-                                <button type="submit" class="btn btn-outline-danger">Si</button>
-                                <button class="btn btn-outline-success btn-cerrar"  data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-outline-danger pr-4 pl-4">Si</button>
+                                <button class="btn btn-outline-success btn-cerrar pr-4 pl-4"  data-dismiss="modal">No</button>
                             
                         </div>
         

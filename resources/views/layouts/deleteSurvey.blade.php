@@ -18,7 +18,7 @@
                                                 {{ csrf_field() }}
                                             
                                             <p class="text-white bg-danger font-italic question">Nota:Solo podras eliminar esta encuesta si aun no ha sido contestado por un usuario. De lo contrario saldra un error.</p>
-                                            <input id="itemId" type="text" class="form-control" name="itemId" required>                                            
+                                            <input id="itemId" type="hidden" class="form-control" name="itemId" required>                                            
                                         </div>
                                 </div>
     
@@ -26,8 +26,8 @@
     
                         </div>
                         <div class="modal-footer">
-                                <button type="submit" class="btn btn-outline-danger">Si</button>
-                                <button class="btn btn-outline-success btn-cerrar"  data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-outline-danger pr-4 pl-4">Si</button>
+                                <button class="btn btn-outline-success btn-cerrar pr-4 pl-4"  data-dismiss="modal">No</button>
                             
                         </div>
         

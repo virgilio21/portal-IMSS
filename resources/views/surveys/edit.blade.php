@@ -3,11 +3,24 @@
 
 
 @section('content')
-    
-<div class="col-12" >
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        Realizar cambios cuando un alumno ya ha contestado la encuesta puede afectar a la interpretacion de los resultados. 
+
+<div class="row">
+    @if(Session::has('error'))
+    <div class="col-12" >
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{Session::get('error')}}
+        </div>
+    </div>
+    @endif
+</div>
+
+<div class="row">
+    <div class="col-12" >
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Realizar cambios cuando un alumno ya ha contestado la encuesta puede afectar a la interpretacion de los resultados. 
+        </div>
     </div>
 </div>
 
@@ -22,7 +35,7 @@
                     <h2 class="card-text">
                     <a href="#" class="mb-4" data-toggle="modal" data-target="#editSection" onclick="recibirValue( 'nameSection','{{$section->name}}', 'sectionId', '{{$section->id}}');">{{$section->name}}</a>
                     <a href="#" data-toggle="modal" data-target="#removeItem" onclick="recibirValue('itemId', '{{$section->id}}', 'itemType','section')">
-                    <i class="far fa-trash-alt text-danger"></i>
+                    <i class="far fa-trash-alt text-danger">eli</i>
                     </a>
                     </h2>
                     <div class="text-muted card-text">
@@ -36,7 +49,7 @@
                                     {{$loop->iteration}}. {{$question->question}}
                         </a>
                         <a href="#" data-toggle="modal" data-target="#removeItem" >
-                            <i class="far fa-trash-alt text-success" onclick="recibirValue('itemId', '{{$question->id}}', 'itemType','question')"></i>
+                            <i class="far fa-trash-alt text-success" onclick="recibirValue('itemId', '{{$question->id}}', 'itemType','question')">eli</i>
                         </a>
                         </p>
 
@@ -59,7 +72,7 @@
                                     </a>
 
                                     <a href="#" data-toggle="modal" data-target="#removeItem" onclick="recibirValue('itemId', '{{$answer->id}}', 'itemType','answer')">
-                                        <i class="far fa-trash-alt text-primary"></i>
+                                        <i class="far fa-trash-alt text-primary">eli</i>
                                     </a>
 
                                     @endif

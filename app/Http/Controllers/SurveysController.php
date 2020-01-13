@@ -275,23 +275,34 @@ class SurveysController extends Controller
         $id = $request->input('itemId');
         $type = $request->input('itemType');
         $survey = session('survey');
-        if( $type == 'section' ){
 
-            $deleteItem = Section::where('id', $id)->firstOrFail();
-            $deleteItem->delete();
-            
+        $users = User::join( 'survey_user', 'survey_user.user_id', '=', 'users.id' )->where('survey_user.status', '=', true)->where('survey_user.survey_id', '=', $survey->id)->get();
 
-            return redirect('/survey/edit/'.encrypt($survey->id));
+        if( !(count($users)) ){
 
-        }
-        elseif( $type == 'question' ){
-            $deleteItem = Question::where('id', $id)->firstOrFail();
-            $deleteItem->delete();
+        
+            if( $type == 'section' ){
+
+                $deleteItem = Section::where('id', $id)->firstOrFail();
+                $deleteItem->delete();
+                
+
+                return redirect('/survey/edit/'.encrypt($survey->id));
+
+            }
+            elseif( $type == 'question' ){
+                $deleteItem = Question::where('id', $id)->firstOrFail();
+                $deleteItem->delete();
+            }
+            else{
+
+                $deleteItem = Answer::where('id', $id)->firstOrFail();
+                $deleteItem->delete();
+            }
         }
         else{
 
-            $deleteItem = Answer::where('id', $id)->firstOrFail();
-            $deleteItem->delete();
+            session()->flash( 'error', 'No es posible eliminar el elemento, ya que un usuario ya la ha contestado la encuesta a la cual pertenece.' );
         }
 
 

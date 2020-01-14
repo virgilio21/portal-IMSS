@@ -1,13 +1,9 @@
 <?php
 
 namespace App;
-<<<<<<< HEAD
-
-=======
 use App\Role;
 use App\User;
 use App\StudentGroup;
->>>>>>> landing
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,8 +38,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-<<<<<<< HEAD
-=======
 
     public function roles(){
         return $this-> belongsToMany(Role::class)->withTimestamps();
@@ -109,5 +103,4 @@ class User extends Authenticatable
         return $this->hasMany(StudentGroup::class);
     }
 
->>>>>>> landing
 }

@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-=======
->>>>>>> landing
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +10,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@welcome');
+Route::get('/index/profesores', 'IndexController@profesores');
+Route::get('/noticia/show/{id}','IndexController@noticia');
+Route::get('/noticias/all','IndexController@noticias');
 
 Auth::routes();
 
-<<<<<<< HEAD
-Route::get('/home', 'HomeController@index')->name('home');
-=======
 Route::group(['middleware'=>'auth'],function(){
 
     //administrador
@@ -62,6 +56,9 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::get('/noticias','NewController@showNew');
     Route::post('/noticia/create','NewController@create');
+    Route::get('/noticia/eliminar/{show}','NewController@eliminarUnRegistro');
+    Route::get('/noticia/{show}/edit','NewController@editarUnRegistro');
+    Route::PATCH('/noticia/update/{id}','NewController@update');
 
     Route::get('/descargar','UserController@descargar');
 
@@ -87,16 +84,15 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::get('/unidad/{show}/','UnitController@showUnitTeacher');
     Route::post('/unidad/create','UnitController@create');
-    Route::get('/unidades/eliminar/{id}','UnitController@eliminarUnidades');
+    Route::post('/unidades/eliminar/{id}','UnitController@eliminarUnidades');
     Route::get('/editarUnidad/{id}/{name}','UnitController@editarUnidad');
     Route::PATCH('/unidad/update/','UnitController@updateUnidad');
 
     Route::get('/calificacion/{show}/{show2}','UnitController@subirCalificacion');
     Route::post('/subir','UnitController@actualizar');
-    Route::get('/promedio/{id}/{id2}','UnitController@promedioAlumno');
+    Route::post('/promedio/{id}/{id2}','UnitController@promedioAlumno');
 
 
 });
 
 
->>>>>>> landing

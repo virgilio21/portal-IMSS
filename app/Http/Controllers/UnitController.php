@@ -16,17 +16,19 @@ class UnitController extends Controller
     //*******************************************************Teacher
 
     //ver pagina unidad
-    public function showUnitTeacher($grupo){
+    public function showUnitTeacher(Request $data, $grupo){
         //$al = User::find($alumno);
-        $gr = Group::find($grupo);
-        $unidades = Unit::where('matter_user_id',$grupo)->distinct()->get(['name_unit','matter_user_id']);
+        $data -> user()->authorizeRoles('teacher');
+        $gr = Group::find(decrypt($grupo));
+        $unidades = Unit::where('matter_user_id',decrypt($grupo))->distinct()->get(['name_unit','matter_user_id']);
         //$unidades = Unit::all();
         //dd($unidades);
-        return view('unit',['grupo' => $gr, 'unidades'=>$unidades]);
+        return view('teacher.unit',['grupo' => $gr, 'unidades'=>$unidades]);
     }
 
     //agregar unidad a todos los alumnos
     public function create(Request $data){
+        $data -> user()->authorizeRoles('teacher');
         $grupo =  $data -> input('id_grupo');
         //$alumno = $data -> input('id_alumno');
        
@@ -36,33 +38,38 @@ class UnitController extends Controller
             if($gr -> id == $key -> matter_user_id){
                 $unidad = new Unit();
                 $unidad -> name_unit = $data -> input('name_unit');
-                $unidad -> qualification = 0.0;
+                $unidad -> qualification = null;
                 $unidad -> matter_user_id = $data -> input('id_grupo');
                 $unidad -> user_id = $key -> user_id;//$data -> input('id_alumno');
                 $unidad -> visibility = true;
                 $unidad -> save();
 
-                Session::flash('mensaje','Se creo una unidad correctamente');
+                Session::flash('mensaje','SE CREO UNA UNIDAD CORRECTAMENTE');
                 
+            }else{
+                Session::flash('error','NO TIENES NINGÚN ALUMNO REGISTRADO AL GRUPO');
             }
             
         }
         
-        return redirect('unidad/'.$grupo);
+        return redirect('unidad/'.encrypt($grupo));
     }
 
 
     //ir a la vista editar unidades
-    public function editarUnidad(Request $request, $id, $name){
-       
-        $grupo = Group::find($id);
-       
-       return view('unit')->with(['edit' => true, 'grupo'=>$grupo,'name_unit'=>$name,'unidad','id'=>$id]);//, 'unidad'=>$unidad]);
+    public function editarUnidad(Request $data, $id, $name){
+        $data -> user()->authorizeRoles('teacher');
+        $idN = decrypt($id);
+        $nameN = decrypt($name);
+        $grupo = Group::find($idN);
+        
+       return view('teacher.unit')->with(['edit' => true, 'grupo'=>$grupo,'name_unit'=>$nameN,'unidad','id'=>$idN]);//, 'unidad'=>$unidad]);
     }
 
 
      //editar unidades
      public function updateUnidad(Request $data){
+         $data -> user()->authorizeRoles('teacher');
          $name_anterior = $data -> input('unit');
          $id_grupo = $data -> input('id_grupo');
          $name_nuevo = $data -> input('name_unit');
@@ -76,30 +83,33 @@ class UnitController extends Controller
                 $actualizar = Unit::find($key->id);
                 $actualizar -> name_unit = $name_nuevo;
                 $actualizar -> save();
+                Session::flash('mensaje','SE ACTUALIZO UNA UNIDAD CORRECTAMENTE');
             }
          }  
-         return redirect('/unidad'.'/'.$id_grupo);
+         return redirect('/unidad'.'/'.encrypt($id_grupo));
      }
 
 
     //eliminar todas las unidades
-    public function eliminarUnidades($id){
+    public function eliminarUnidades(Request $data, $id){
+        $data -> user()->authorizeRoles('teacher');
         $unidades = Unit::where('matter_user_id',$id)->get();
         
         foreach ($unidades as $key => $value) {
             # code...
             $value->delete();
         }
-
-        return redirect('/unidad'.'/'.$id);
+        Session::flash('mensaje','SE ELIMINO TODAS LAS UNIDADES');
+        return redirect('/unidad'.'/'.encrypt($id));
     }
 
 
 
-    //subir calificacion
-    public function subirCalificacion($g,$a){
-        $alumno = User::find($a);
-        $grupo = Group::find($g);
+    //vista para subir calificacion al alumno
+    public function subirCalificacion(Request $data, $g,$a){
+        $data -> user()->authorizeRoles('teacher');
+        $alumno = User::find(decrypt($a));
+        $grupo = Group::find(decrypt($g));
         $unidades = Unit::all();
         $alumnos = StudentGroup::all();
         foreach ($alumnos as $key) {
@@ -108,23 +118,25 @@ class UnitController extends Controller
             }
         }
 
-        return view('StudentQualification',['alumno'=>$alumno,'grupo'=>$grupo,'unidades'=>$unidades,'promedio'=>$calificacion]);
+        return view('teacher.StudentQualification',['alumno'=>$alumno,'grupo'=>$grupo,'unidades'=>$unidades,'promedio'=>$calificacion]);
     }
 
 
     //actualizar calificacion
     public function actualizar(Request $data){
+        $data -> user()->authorizeRoles('teacher');
         $id_unidad = $data -> input('id_unidad');
         $unidad = Unit::find($id_unidad);
         $unidad -> qualification = $data -> input('calification');
         $unidad -> save();
-        Session::flash('mensaje','Se inserto una calificación correctamente ');
-        return redirect('calificacion/'.$unidad->matter_user_id.'/'.$unidad->user_id);
+        Session::flash('mensaje','SE INSERTO UNA CALIFICACIÓN CORRECTAMENTE');
+        return redirect('calificacion/'.encrypt($unidad->matter_user_id).'/'.encrypt($unidad->user_id));
     }
 
 
     //sacar promedio final
-    public function promedioAlumno($al, $gr){
+    public function promedioAlumno(Request $data, $al, $gr){
+        $data -> user()->authorizeRoles('teacher');
         $unidades = Unit::all();
         $promedio = 0;
         $suma = 0;
@@ -139,7 +151,7 @@ class UnitController extends Controller
         }
         
         $subir = StudentGroup::where(['matter_user_id'=>$gr,'user_id'=>$al])->update(['final_qualification'=>round($promedio,2)]);
-        return redirect('calificacion/'.$gr.'/'.$al);
+        return redirect('calificacion/'.encrypt($gr).'/'.encrypt($al));
     }
 
 

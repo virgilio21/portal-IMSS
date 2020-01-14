@@ -94,7 +94,7 @@
      <div class="form-group row mb-0">
          <div class="col-md-6 offset-md-4">
              <button type="submit" class="btn btn-warning">
-                     {{ __('Modificar') }}
+                     {{ __('Actualizar') }}
              </button>
          </div>
      </div>
@@ -102,5 +102,7 @@
 
  </form>
 </div>
+
 @endif
                 </div></div></div></div>
+                <br>

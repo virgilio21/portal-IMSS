@@ -2,12 +2,13 @@
 @section('content')
 
 @if(Session::has('mensaje'))
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('mensaje')}}
+    <div class="col-md-12" >
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p class="text-center">{{Session::get('mensaje')}}</p>
+        </div>
     </div>
 @endif
-
 
 <div class="container">
     <div class="row justify-content-center">
@@ -24,7 +25,7 @@
                             <label for="matricula" class="col-md-4 col-form-label text-md-right">{{ __('Matricula') }}</label>
 
                             <div class="col-md-6">
-                                <input id="matricula" type="text" class="form-control @error('description') is-invalid @enderror" name="matricula" value="{{old('matricula')}}" required autocomplete="matricula" autofocus>
+                                <input id="matricula" type="text" class="form-control @error('matricula') is-invalid @enderror" name="matricula" value="{{old('matricula')}}" required autocomplete="matricula" autofocus>
 
                                 @error('matricula')
                                     <span class="invalid-feedback" role="alert">
@@ -47,15 +48,13 @@
         </div>
     </div>
 </div>
-
-<br><br>
-
+<br>
 
 @if (isset($alumno))
-
-    @if($alumno ->hasRole('user'))
     <div class="text-center col-md-12" >
-    <table class="table table-responsive-xl table-striped">
+    @if($alumno ->hasRole('user'))
+    
+    <table class="table table-responsive-xl table-striped buscador">
     
             <thead>
                 <th>Matricula</th>
@@ -64,8 +63,13 @@
                 <th>Semestre</th>
                 <th>Dirección</th>
                 <th>Telefono</th>
-                <th>Cursos</th>
-                <th>Acción</th>
+                @if($alumno->semester==9 and $alumno->visibility == 0)
+                    <th>Estatus</th>
+                @else
+                    <th>Cursos</th>
+                    <th>Acción</th>
+                @endif
+               
             </thead>    
     
     
@@ -79,17 +83,26 @@
                     <td>{{ $alumno['address']}}</td>
                     <td>{{ $alumno['phone']}} </td>
                     <!--</p>-->
-                    <td><a href="alumno/cursos/{{$alumno->id}}" class="btn btn-success">Ver</a></td>
+                    @if($alumno->semester==9 and $alumno->visibility == 0)
+                    
+                    @else
+                        <td><a href="alumno/cursos/{{$alumno->id}}" class="btn btn-success">Ver</a></td>
+                    @endif
 
                     @if($alumno->visibility == 0)
-                        <td ><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#alta" onclick="recibirValue('alta2','{{$alumno->id}}')">Alta</a></td>
+                        @if($alumno->semester==9)
+                            <td><a href="#" class="btn btn-success">EGRESADO</a></td>
+                        @else
+                            <td ><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#alta" onclick="recibirValue('alta2','{{$alumno->id}}')">Alta</a></td>
+                        @endif
                     @else
                         <td ><a href="#" class="btn btn-danger"  data-toggle="modal" data-target="#baja" onclick="recibirValue('baja2','{{$alumno->id}}')">Baja</a></td>     
                     @endif
+
                     <!--</div>-->
                 </tr>
     </table>  
-    </div> 
+    
     @endif
 
 
@@ -126,13 +139,12 @@
     </table>   
     @endif     
 
-
+    </div> 
 @endif  
  
 
 
 <script src="{{asset('js/passValueOfModal.js')}}"></script>
-
 
 <form action="/bajaUsuario" method="POST" >
     {{csrf_field()}}
@@ -186,5 +198,12 @@
 
 
 
-
 @endsection
+
+
+
+
+
+
+
+

@@ -6,11 +6,31 @@
 @else 
 
     @if(Session::has('mensaje'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {{Session::get('mensaje')}}
+        <div class="col-md-12" >
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="text-center">{{Session::get('mensaje')}}</p>
+            </div>
         </div>
     @endif
+
+    @if(Session::has('error'))
+        <div class="col-md-12" >
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="text-center">{{Session::get('error')}}</p>
+            </div>
+        </div>
+    @endif
+
+    
+    <div class="col-md-12" >
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p class="text-center">LA MATRICULA DEL USUARIO ES LA CONTRASEÑA PARA QUE INICIE SESIÓN.</p>
+        </div>
+    </div>
+    
 
 
     <div class="container">
@@ -141,7 +161,7 @@
                                 @endforeach
                         
                             <!--</p>-->
-                            <td ><a href="/usuario/{{$item -> id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
+                            <td ><a href="/usuario/{{encrypt($item -> id)}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
                             
                            
                     </tr>

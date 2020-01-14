@@ -19,7 +19,7 @@ class CreateUnitsTable extends Migration
             $table->bigInteger('matter_user_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign(['matter_user_id','user_id'])->references(['matter_user_id','user_id'])->on('matter_user_user')->onDelete('cascade');
-            $table->double('qualification');
+            $table->double('qualification')->nullable();
             $table->boolean('visibility');
             $table->timestamps();
         });

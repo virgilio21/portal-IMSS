@@ -7,11 +7,13 @@
         @else 
 
         @if(Session::has('mensaje'))
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('mensaje')}}
-    </div>
-@endif
+        <div class="col-md-12" >
+            <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p class="text-center">{{Session::get('mensaje')}}</p>
+            </div>
+        </div>
+        @endif
 
 
         <div class="container">
@@ -23,12 +25,26 @@
     <form method="POST" action="/matter/create">
         {{csrf_field()}}
 
+        
+        <div class="form-group row">
+            <label for="key_matter" class="col-md-4 col-form-label text-md-right">{{ __('Clave materia') }}</label>
+
+            <div class="col-md-6">
+            <input id="key_matter" type="text" class="form-control @error('key_matter') is-invalid @enderror" name="key_matter" value="{{old('key_matter')}}" required autocomplete="key_matter" autofocus>
+
+            @error('key_matter')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            </div>
+        </div>
    
         <div class="form-group row">
                 <label for="name_matter" class="col-md-4 col-form-label text-md-right">{{ __('Materia') }}</label>
     
                 <div class="col-md-6">
-                <input id="name_matter" type="text" class="form-control @error('description') is-invalid @enderror" name="name_matter" value="{{old('name_matter')}}" required autocomplete="name_matter" autofocus>
+                <input id="name_matter" type="text" class="form-control @error('name_matter') is-invalid @enderror" name="name_matter" value="{{old('name_matter')}}" required autocomplete="name_matter" autofocus>
     
                 @error('name_matter')
                     <span class="invalid-feedback" role="alert">
@@ -38,20 +54,6 @@
                 </div>
             </div>
 
-
-            <div class="form-group row">
-                <label for="key_matter" class="col-md-4 col-form-label text-md-right">{{ __('Clave materia') }}</label>
-    
-                <div class="col-md-6">
-                <input id="key_matter" type="text" class="form-control @error('description') is-invalid @enderror" name="key_matter" value="{{old('key_matter')}}" required autocomplete="key_matter" autofocus>
-    
-                @error('key_matter')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-                </div>
-            </div>
 
         <div class="form-group row">
                 <label for="number_hours" class="col-md-4 col-form-label text-md-right">{{ __('Numero Hrs') }}</label>
@@ -111,7 +113,6 @@
         </div>
 
     </form>
-    @endif
 </div>    
             </div>
         </div>
@@ -121,13 +122,10 @@
         
 
 
-        @if (!(empty($materias)))
+        @if (isset($materias))
         <div class="text-center col-md-12" >
             <table class="table table-responsive-xl table-striped">
-
-
             
-                    
                 @foreach ($materias as $materia) 
                 <!--<div class="alert alert-dark" role="alert">-->
                     
@@ -136,8 +134,8 @@
                         
                             @if ($loop->iteration == 1)
                                 <thead>
-                                    <th>Materia</th>
                                     <th>Clave</th>
+                                    <th>Materia</th>
                                     <th>Horas</th>
                                     <th>Creditos</th>
                                     <th>Semestre</th>
@@ -146,16 +144,15 @@
                                 </thead>
                             @endif
                         
-                            <tr>
-
-                                <td>{{ $materia -> name_matter}} </td>
+                            <tr>                   
                                 <td>{{ $materia -> key_matter}} </td>
+                                <td>{{ $materia -> name_matter}} </td>
                                 <td>{{ $materia -> number_hours}}</td>
                                 <td>{{ $materia -> number_credits}} </td>
                                 <td>{{ $materia -> semester}}</td>
                             
                                 <!--</p>-->
-                                <td ><a href="/matter/{{$materia -> id}}/edit/" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
+                                <td ><a href="/matter/{{encrypt($materia -> id)}}/edit/" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
                                  <!--<<td ><a href="/matter/eliminar/{$materia -> id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>-->
                                 <!--</div>-->
                             </tr>
@@ -169,7 +166,7 @@
         <!-- <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
                 Nueva tarea
             </a>    -->    
-
+    @endif
 @endsection
 
 

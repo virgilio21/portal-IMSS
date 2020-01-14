@@ -10,16 +10,16 @@ use Excel;
 
 class GroupController extends Controller
 {
-    //ADMINISTRADOR
+    //***************************************************ADMINISTRADOR
 
     //ver vista grupos 
     public function showGroup(Request $data){
         $data->user()->authorizeRoles('admin');
         $materias = Matter::orderBy('semester','ASC')->get();
         $maestros = User::orderBy('id','ASC')->get();
-        $grupos = Group::orderBy('id','ASC')->get();
+        $grupos = Group::where('visibility','=','1')->get();
         $data->session()->forget('alumno');
-        return view('Group',['materias' => $materias, 'maestros' => $maestros, 'grupos' => $grupos]);
+        return view('admin.Group',['materias' => $materias, 'maestros' => $maestros, 'grupos' => $grupos]);
     }
 
     //crear un grupo
@@ -33,7 +33,7 @@ class GroupController extends Controller
         $group -> visibility = true;
         $group -> save();
       
-        Session::flash('mensaje','Se creo un grupo correctamente');
+        Session::flash('mensaje','SE CREO UN GRUPO CORRECTAMENTE');
         return redirect('/grupos');
 
     }
@@ -41,7 +41,7 @@ class GroupController extends Controller
     //Eliminar un registro (ocultar el registro)
     public function eliminarUnRegistro(Request $request ,$id){
         $request->user()->authorizeRoles('admin');
-        $grupo = Group::find($id);
+        $grupo = Group::find(decrypt($id));
         $grupo -> visibility = false;
         $grupo -> save();
         return redirect('/grupos');
@@ -51,10 +51,10 @@ class GroupController extends Controller
     //ir a la vista editar
     public function editarUnRegistro(Request $request,$id){
         $request->user()->authorizeRoles('admin');
-        $group = Group::find($id);
+        $group = Group::find(decrypt($id));
         $maestros = User::orderBy('id','ASC')->get();
         $materias = Matter::all();
-        return view('group')->with(['edit' => true, 'gro' => $group, 'maestros' => $maestros, 'materias' => $materias]);
+        return view('admin.group')->with(['edit' => true, 'gro' => $group, 'maestros' => $maestros, 'materias' => $materias]);
 
     }
 
@@ -67,7 +67,7 @@ class GroupController extends Controller
         $grupo -> description = $data -> description2;
         $grupo -> group = $data -> group;
         $grupo -> save();
-        Session::flash('mensaje','Se actualizo un grupo correctamente');
+        Session::flash('mensaje','SE ACTUALIZO UN GRUPO CORRECTAMENTE');
         return redirect('/grupos');
     }
 
@@ -86,7 +86,7 @@ class GroupController extends Controller
 
             if($value->hasRole('user') and $value->semester==8){
                 $value -> visibility= 0;
-                $value -> semester = null;
+                $value -> semester = 9;
                 $value -> save();
             }
 

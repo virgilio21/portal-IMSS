@@ -3,10 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Schema;
->>>>>>> landing
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,10 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-<<<<<<< HEAD
-=======
         Schema::defaultStringLength(191);
->>>>>>> landing
     }
 
     /**

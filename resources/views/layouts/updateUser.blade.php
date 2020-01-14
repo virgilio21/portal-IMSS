@@ -1,5 +1,13 @@
 @if (isset($user))
 
+<div class="col-md-12" >
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p class="text-center">LA MATRICULA DEL USUARIO ES LA CONTRASEÑA PARA QUE INICIE SESIÓN.</p>
+    </div>
+</div>
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -108,5 +116,5 @@
             </div>
         </div>
     </div>
-
+    <br>
 @endif

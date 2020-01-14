@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-md-12" >
     <h2 style="text-align: center;">Historial academico no oficial</h2>
   
     @if (Auth::user()-> semester == 2)
@@ -27,8 +28,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                    
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -38,8 +40,8 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif         
                 @endforeach       
             @endif
         @endforeach
@@ -67,8 +69,7 @@
             $veces = 0;
             $prom = 0;
         @endphp
-
-       
+        
                 <h2>Primer semestre</h2>
                 <thead>
                     <th>Materia</th>
@@ -76,16 +77,16 @@
                     <th>Horas</th>
                     <th>Calificación</th>
                 </thead>
-           
 
         @foreach (Auth::user() -> groups as $curso)
 
-
+            
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                   
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -95,8 +96,8 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
                 @endforeach       
             @endif
         @endforeach
@@ -118,10 +119,9 @@
                     <th>Horas</th>
                     <th>Calificación</th>
                 </thead>
-         
+
         @foreach (Auth::user() -> groups as $curso)
 
-           
 
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
@@ -187,8 +187,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                    
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -198,8 +199,9 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
+                   
                 @endforeach       
             @endif
         @endforeach
@@ -335,8 +337,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                    
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -346,8 +349,9 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
+                   
                 @endforeach       
             @endif
         @endforeach
@@ -537,8 +541,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                   
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -548,8 +553,8 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
                 @endforeach       
             @endif
         @endforeach
@@ -789,8 +794,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                    
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -800,8 +806,9 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
+                  
                 @endforeach       
             @endif
         @endforeach
@@ -1092,8 +1099,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                   
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -1103,8 +1111,9 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
+                    
                 @endforeach       
             @endif
         @endforeach
@@ -1421,7 +1430,7 @@
 
 
 
-    @if (Auth::user()-> semester == null and Auth::user()->visibility==0)
+    @if (Auth::user()-> semester == 9 and Auth::user()->visibility==0)
     <table class="table table-responsive-xl table-striped">
             
         @php
@@ -1444,8 +1453,9 @@
             @if ($curso->visibility==0)
                 @foreach (Auth::user()->grupoAlumno as $item)
 
-                    <tr>
+                   
                     @if ($item->matter_user_id == $curso->id and $curso->matter->semester==1)
+                    <tr>
                         <td>{{$curso->matter->name_matter}}</td>
                         <td>{{$curso->matter->number_credits}}</td>
                         <td>{{$curso->matter->number_hours}}</td>
@@ -1455,8 +1465,9 @@
                            $veces += count([$item->final_qualification]);
                            $prom = ($suma/$veces);
                        @endphp
-                    @endif
                     </tr>
+                    @endif
+                   
                 @endforeach       
             @endif
         @endforeach
@@ -1818,5 +1829,5 @@
     
     <h3 style="text-align: center;">Promedio General: {{round($promG,2)}}</h3>
     @endif
-
+</div>
 @endsection

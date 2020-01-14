@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-md-10 text-center" style="margin:auto" >
     <h2>Información Personal</h2>
     <br>
 
@@ -14,49 +15,48 @@
     <form action="/update/information/" method="POST">
         {{ csrf_field() }}
         <div style="display: flex; flex-wrap: wrap;">
-            <div class="alert alert-primary alert-dismissible" style = "width:350px; " > 
+            <div class="alert alert-primary alert-dismissible col-md-4"> 
                 <p style="font-weight: bold;">Matricula</p>
                 <label>{{Auth::user()->enrollment}}</label>
             </div>
-            <a href="/descargar">Excel descargable</a>
         </div>
     
-        <div style="display: flex; flex-wrap: wrap;">
-            <div style = "width:350px" class="alert alert-success alert-dismissible"> 
+        <div style="display: flex; flex-wrap: wrap; ">
+            <div class="alert alert-success alert-dismissible col-md-4"> 
                 <p style="font-weight: bold;">Nombres</p>
                 <label>{{Auth::user()->name}}</label>
             </div>
-            <div style = "width:350px" class="alert alert-success alert-dismissible"> 
+            <div class="alert alert-success alert-dismissible col-md-4"> 
                 <p style="font-weight: bold;">Apellidos</p>
                 <label>{{Auth::user()->surnames}}</label>
             </div>
             
             @if (Auth::user()->hasRole('user'))
-                @if(Auth::user()->semester==null)
-                    <div style = "width:350px"; class="alert alert-success alert-dismissible"> 
+                @if(Auth::user()->semester==9)
+                    <div class="alert alert-success alert-dismissible col-md-4"> 
                         <p style="font-weight: bold;">Alumno</p>
                         <label>Egresado</label>
                     </div>
                 @else
-                    <div style = "width:350px"; class="alert alert-success alert-dismissible"> 
+                    <div class="alert alert-success alert-dismissible col-md-4"> 
                         <p style="font-weight: bold;">Semestre</p>
                         <label>{{Auth::user()->semester}}</label>
                     </div>
                 @endif
             @endif
 
-            <div style = "width:350px;" class="alert alert-success alert-dismissible"> 
+            <div class="alert alert-success alert-dismissible col-md-4"> 
                 <p style="font-weight: bold;">Email</p>
-                <input name="email" type="text" value="{{Auth::user()->email}}" style="width: 100%">
+                <input name="email" type="text" value="{{Auth::user()->email}}" style="width:90%">
             </div>
             
-            <div style = "width:350px"; class="alert alert-success alert-dismissible"> 
+            <div class="alert alert-success alert-dismissible col-md-4"> 
                 <p style="font-weight: bold;">Domicilio</p>
-                <input name="address" type="text" value="{{Auth::user()->address}}" style="width: 100%">
+                <input name="address" type="text" value="{{Auth::user()->address}}" style="width:90%">
             </div>
-            <div style = "width:350px"; class="alert alert-success alert-dismissible" > 
+            <div class="alert alert-success alert-dismissible col-md-4">  
                 <p style="font-weight: bold;">Celular</p>
-                <input name="phone" type="text" value="{{Auth::user()->phone}}" style="width: 100%">
+                <input name="phone" type="text" value="{{Auth::user()->phone}}" style="width:90%">
             </div>    
         </div>   
 
@@ -65,5 +65,7 @@
                 {{ __('Actualizar') }} 
         </button>
     </form>
+    <br>
+</div>
 @endsection
     

@@ -23,7 +23,7 @@ class MatterController extends Controller
         $materias = Matter::orderBy('semester','ASC')->get();
         $users = User::orderBy('id','ASC')->get();
         $request->session()->forget('alumno');
-        return view('matter')->with(['materias' => $materias,'users' => $users]);
+        return view('admin.matter')->with(['materias' => $materias,'users' => $users]);
     }
 
     //INSERTAR MATERIA
@@ -37,7 +37,7 @@ class MatterController extends Controller
         $materia -> semester = $data -> input('semester');
         $materia -> visibility = true;
         $materia -> save();
-        Session::flash('mensaje','Se creo una materia correctamente');
+        Session::flash('mensaje','SE CREO UNA MATERIA CORRECTAMENTE');
         return redirect('/matters');
 
     }
@@ -55,8 +55,8 @@ class MatterController extends Controller
     //ir a la vista editar
     public function editarUnRegistro(Request $request,$id){
         $request->user()->authorizeRoles('admin');
-        $materia = Matter::find($id);
-        return view('matter')->with(['edit' => true, 'mate' => $materia]);
+        $materia = Matter::find(decrypt($id));
+        return view('admin.matter')->with(['edit' => true, 'mate' => $materia]);
 
     }
 
@@ -70,7 +70,7 @@ class MatterController extends Controller
         $mater -> number_credits = $data -> number_credits;
         $mater -> semester = $data -> semester;
         $mater -> save();
-        Session::flash('mensaje','Se actualizo una materia correctamente');
+        Session::flash('mensaje','SE ACTUALIZO UNA MATERIA CORRECTAMENTE');
         return redirect('/matters');
      }
 
@@ -85,7 +85,20 @@ class MatterController extends Controller
      public function showMatterTeacher(Request $data){
         $data -> user()->authorizeRoles('teacher');
         $grupos = Group::all();
-        return view('matterTeacher',['grupos' => $grupos]);
+
+        $teacher = auth()->user();
+        $visibles = [];
+        foreach ($grupos as $grupo) {
+            if ($teacher-> id == $grupo-> user_id) {
+                if ($grupo -> visibility == 1) {
+                    # code...
+                    $visibles[] = $grupo;
+                }
+            }
+        }
+
+
+        return view('teacher.matterTeacher',['grupos' => $grupos, 'grupo' => $visibles]);
        
      }
     

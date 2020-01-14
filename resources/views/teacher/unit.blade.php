@@ -7,20 +7,24 @@
 
 
     @if(Session::has('mensaje'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {{Session::get('mensaje')}}
+        <div class="col-md-12" >
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="text-center">{{Session::get('mensaje')}}</p>
+            </div>
         </div>
     @endif
 
     @if(Session::has('error'))
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {{Session::get('error')}}
+        <div class="col-md-12" >
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="text-center">{{Session::get('error')}}</p>
+            </div>
         </div>
     @endif
 
-
+    <div class="col-md-12" >
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -63,7 +67,7 @@
     </div>
                 
     <br><br>
-    <a href="/unidades/eliminar/{{$grupo->id}}" class="btn btn-danger">Borrar Unidades</a>
+    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#create">Borrar Unidades</a>
     <br><br>
 
         @if(isset($unidades))  
@@ -81,15 +85,40 @@
                     @if($item->matter_user_id == $grupo->id)
                         <tr>
                             <td>{{$item->name_unit}}</td>
-                            <td><a href="/editarUnidad/{{$item->matter_user_id}}/{{$item->name_unit}}" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="/editarUnidad/{{encrypt($item->matter_user_id)}}/{{encrypt($item->name_unit)}}" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
                         </tr>
                     @endif
  
                 @endforeach
             </table>
         @endif
-
+    </div>
 
 @endif
+
+
+
+<form action="/unidades/eliminar/{{$grupo->id}}" method="POST" >
+    {{csrf_field()}}
+    <div class="modal fade" id="create">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">¿Estas seguro de eliminar todas las unidades a los alumnos registrados al curso?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Aceptar') }}
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 @endsection

@@ -23,13 +23,10 @@ class EditUsersTable extends Migration
             $table->string('phone');
             //Matricula del alumno o maestro
             $table->string('enrollment');
-<<<<<<< HEAD
-=======
             //semestre
             $table->bigInteger('semester')->nullable();
             //baja falsa
             $table->boolean('visibility');
->>>>>>> landing
 
         });
     }
@@ -45,17 +42,11 @@ class EditUsersTable extends Migration
 
             //
             $table->dropColumn('surnames');
-<<<<<<< HEAD
-            $table->dropColumn('addres');
-            $table->dropColumn('phone');
-            $table->dropColumn('enrollment');
-=======
             $table->dropColumn('address');
             $table->dropColumn('phone');
             $table->dropColumn('enrollment');
             $table->dropColumn('semester');
             $table->dropColumn('enrollment');
->>>>>>> landing
         });
     }
 }

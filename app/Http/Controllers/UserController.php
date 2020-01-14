@@ -22,23 +22,27 @@ class UserController extends Controller
     {
         $data -> user()->authorizeRoles('admin');
         $rol = $data['rol'];
-
-        $user = new User;
-        $user -> name= $data -> input ('name');
-        $user -> email = $data -> input ('email');
-        $user -> password = Hash::make($data -> input('enrollment'));
-        $user -> surnames = $data -> input('surname');
-        $user -> enrollment = $data -> input('enrollment');
-        $user -> address = "";
-        $user -> phone = "";
-        if ($rol=='user') {
-            $user -> semester = 1;
-        }
-        $user -> visibility = true;
-        $user -> save();
-        $user -> Roles() -> attach(Role::where('name',$rol)->first());
-        Session::flash('mensaje','Se inserto un usuario correctamente');
-        return redirect('/usuarios');
+        $email = User::where('email','=',$data -> input ('email'))->get();
+        $matricula = User::where('enrollment','=',$data -> input ('enrollment'))->get();
+      
+        
+                    $user = new User;
+                    $user -> name= $data -> input ('name');
+                    $user -> email = $data -> input ('email');
+                    $user -> password = Hash::make($data -> input('enrollment'));
+                    $user -> surnames = $data -> input('surname');
+                    $user -> enrollment = $data -> input('enrollment');
+                    $user -> address = "";
+                    $user -> phone = "";
+                        if ($rol=='user') {
+                            $user -> semester = 1;
+                        }
+                    $user -> visibility = true;
+                    $user -> save();
+                    $user -> Roles() -> attach(Role::where('name',$rol)->first());
+                    Session::flash('mensaje','SE INSERTO UN USUARIO CORRECTAMENTE');
+                    return redirect('/usuarios');
+                    
 
     }
 
@@ -47,14 +51,14 @@ class UserController extends Controller
         $data -> user()->authorizeRoles('admin');
         $users = User::all();
         $data->session()->forget('alumno');
-        return view ('user',['users'=>$users]);
+        return view ('admin.user',['users'=>$users]);
     }
 
     //ver vista actualizar USer
     public function showUpdateUser(Request $data, $id){
         $data -> user()->authorizeRoles('admin');
-        $user = User::find($id);
-        return view('user')->with(['edit' => true, 'user' => $user]);
+        $user = User::find( decrypt($id));
+        return view('admin.user')->with(['edit' => true, 'user' => $user]);
     }
 
     //actualizar USer
@@ -62,25 +66,56 @@ class UserController extends Controller
         $data -> user()->authorizeRoles('admin');
 
         $rol = $data['rol'];
-        $user = User::find($id);
-        $user -> name = $data -> name;
-        $user -> surnames = $data -> surname;
-        $user -> enrollment = $data -> enrollment;
-        $user -> email = $data -> email;
-        $user -> password = Hash::make($data -> enrollment);
 
-        if ($rol=='user') {
-            $user -> semester = 1;
-        }
-        if ($rol=='teacher' or $rol=='admin') {
-            $user -> semester = null;
-        }
+        $email = User::where('email','=',$data -> input ('email'))->get();
+        $matricula = User::where('enrollment','=',$data -> input ('enrollment'))->get();
+      
+        if (count($email) and count($matricula)) {
+            # code...
+            Session::flash('error','LA MATRICULA Y EL EMAIL YA SON EXISTENTES A ALGUN USUARIO REGISTRADO.');
+            return redirect('/usuarios');
 
-        $user -> save();
-        $user->Roles()->detach();
-        $user -> Roles() -> attach(Role::where('name',$rol)->first());
-        Session::flash('mensaje','Se actualizo un usuario correctamente');
-        return redirect('/usuarios');
+
+        }else{
+
+            if (count($email)) {
+                # code...
+                Session::flash('error','EL EMAIL YA EXISTE A ALGUN USUARIO REGISTRADO.');
+                return redirect('/usuarios');
+    
+            }else{
+                if (count($matricula)) {
+                    # code...
+                    Session::flash('error','LA MATRICULA YA EXISTE A ALGUN USUARIO REGISTRADO.');
+                    return redirect('/usuarios');
+
+                }else{
+
+                    $user = User::find($id);
+                    $user -> name = $data -> name;
+                    $user -> surnames = $data -> surname;
+                    $user -> enrollment = $data -> enrollment;
+                    $user -> email = $data -> email;
+                    $user -> password = Hash::make($data -> enrollment);
+
+                    if ($rol=='user') {
+                        $user -> semester = 1;
+                    }
+                    if ($rol=='teacher' or $rol=='admin') {
+                        $user -> semester = null;
+                    }
+
+                    $user -> save();
+                    $user->Roles()->detach();
+                    $user -> Roles() -> attach(Role::where('name',$rol)->first());
+                    Session::flash('mensaje','SE ACTUALIZO UN USUARIO CORRECTAMENTE');
+                    return redirect('/usuarios');
+
+                }
+            }
+        }
+        
+
     }
 
 
@@ -91,7 +126,7 @@ class UserController extends Controller
     public function showStudents(Request $data){
         $data -> user()->authorizeRoles('admin');
         $alumnito = $data->session()->get('alumno');
-        return view ('student',['alumno'=>$alumnito]);
+        return view ('admin.student',['alumno'=>$alumnito]);
     }
 
     //buscar alumno
@@ -108,7 +143,17 @@ class UserController extends Controller
     public function showCursosAlumno(Request $data, $id_alumno){
         $data -> user()->authorizeRoles('admin');
         $alumno = User::find($id_alumno);
-        return view ('groupStudent',['alumno'=>$alumno]);
+        $cursos = [];
+        foreach ($alumno -> groups as $curso) {
+            # code...
+            if ($curso->visibility == 1) {
+                # code...
+                $cursos[] = $curso;
+            }
+        }
+
+
+        return view ('admin.groupStudent',['alumno'=>$alumno, 'cursos' => $cursos]);
     }
 
     //desmatricular de algun curso
@@ -126,6 +171,7 @@ class UserController extends Controller
 
     //baja usuario
     public function baja(Request $data){
+        $data -> user()->authorizeRoles('admin');
         $id = $data -> baja2;
         $user = User::find($id);
         $user -> visibility = 0;
@@ -150,18 +196,19 @@ class UserController extends Controller
 
         $user -> save();
         $data->session()->forget('alumno');
-        Session::flash('mensaje','El usuario ha sido dado de baja temporal');
+        Session::flash('mensaje','EL USUARIO HA SIDO DADO DE BAJA TEMPORAL');
         return redirect('/alumnos');
     }
 
     //alta usuario
     public function alta(Request $data){
+        $data -> user()->authorizeRoles('admin');
         $id = $data -> alta2;
         $user = User::find($id);
         $user -> visibility = 1; 
         $user -> save();
         $data->session()->forget('alumno');
-        Session::flash('mensaje','El usuario ha sido dado de alta');
+        Session::flash('mensaje','EL USUARIO HA SIDO DADO DE ALTA');
         return redirect('/alumnos');
     }
 
@@ -190,7 +237,7 @@ class UserController extends Controller
         $user -> address = $data -> address;
         $user -> phone = $data -> phone;
         $user -> save();
-        Session::flash('mensaje','Se actualizo tus datos correctamente');
+        Session::flash('mensaje','SE ACTUALIZO TUS DATOS CORRECTAMENTE');
         return redirect('/perfil');
     }
 
@@ -207,7 +254,7 @@ class UserController extends Controller
     public function showRecord(Request $data){
         $data -> user()->authorizeRoles('user');
         $grupoAlumno = StudentGroup::all();
-        return view('academicRecord',['grupoAlumno'=>$grupoAlumno]);
+        return view('user.academicRecord',['grupoAlumno'=>$grupoAlumno]);
     }
 
     public function descargar(){

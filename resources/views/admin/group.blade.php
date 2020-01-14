@@ -7,9 +7,11 @@
 @else 
 
 @if(Session::has('mensaje'))
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('mensaje')}}
+    <div class="col-md-12" >
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p class="text-center">{{Session::get('mensaje')}}</p>
+        </div>
     </div>
 @endif
 
@@ -97,14 +99,15 @@
         </div>
     </div>
 </div>
+<br>
 <!--<a href="fin" class="btn btn-danger">Fin del curso</a>-->
 <div class="col-md-12 pt-3 pb-3" >
 <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#create">Fin del curso</a>
 </div>
-
-<div class="col-md-12 pt-3 pb-3" >
+<br>
+<!--<div class="col-md-12 pt-3 pb-3" >
 <a href="crearExcel" >Descargar EXCEL</a>
-</div>
+</div>-->
 
 
 @if (isset($grupos))
@@ -122,19 +125,15 @@
                         <!--<th>Eliminar</th>-->
                 </thead>
             @endif    
-
-            @if($item -> visibility == 1)
-
                 
                 <tr>
                     <td>{{$item -> matter -> name_matter}}</td>
                     <td>{{$item -> description}} </td>
                     <td>{{$item -> group}} </td>
                     <td>{{$item -> user -> name}} {{$item -> user -> surnames}}</td>
-                    <td ><a href="/group/{{$item -> id}}/edit/" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
+                    <td ><a href="/group/{{encrypt($item -> id)}}/edit/" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
                     <!--<td ><a href="/group/eliminar/{$item -> id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>-->
                 </tr>
-            @endif
     
         @endforeach
 

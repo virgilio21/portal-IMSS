@@ -1,11 +1,4 @@
 @extends('layouts.app')
-
-<<<<<<< HEAD
-@section('content')
-    <h1>Bienvenido</h1>
-=======
-
-
 @section('content')
 <link rel="stylesheet" href="{{asset('css/index.css')}}">
 
@@ -41,10 +34,7 @@
                         <p class="d-none d-md-block
                         " >eligendi soluta quae illo qui quisquam consequatur, dicta temporibus ex? Nisi facere rem id, perferendis dicta voluptate veritatis hic molestiae voluptas!</p>
 
-                        <a href="#" class="btn btn-outline-light">Ver profesores</a>
-
-                        <button type="buttom" class="btn btn-my-color" data-target="#ticket" data-toggle="modal" >Inscribete</button>
-                      </div>
+                        </div>
                     </div>
 
                   </div>
@@ -77,9 +67,38 @@
   <!--Fin Section Propuesta-->
 
 
+<!--Inicio Section noticias-->
+<section class="container-fluid" id="fondoNoticias">
+<div id="noticias" class="pt-4">
+    <h2 class="text-center mb-4">~ NOTICIAS ~</h2>
+    <p class="text-center"><a href="/noticias/all" class="btn btn-danger">Ver todas las noticias</a></p>
+    <div class="container">
+      <div class="row">
+      @foreach($noticias as $item)    
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-strech">
+          <div class="card">
+            <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{$item->title}}</h5>
+              <div class="d-flex justify-content-around align-items-center">
+                <a href="/noticia/show/{{$item-> id}}" class="btn btn-danger" >Leer más</a><span class="muted badge badge-warning">{{$item->created_at}}</span>
+              </div> 
+            </div>
+          </div>
+        </div>
+      @endforeach
+      </div>
+    </div>
+  </div> 
+  <br>
+  </section>
+  <!--Fin Section noticias-->
+
+
+
   <!--Inicio Section Instalaciones-->
     <div class="pb-2 pt-4" id="instalacion">
-      <h2 class="text-center mb-4" style="color:#02A8A8">~ Instalaciones ~</h2>
+      <h2 class="text-center mb-4">~ INSTALACIONES ~</h2>
       <div class="row componer text-center">
         <div class="col-md-6">
           <img src="{{asset('img/IMG_6035.jpg')}}" alt="" class="instalacion mb-3">
@@ -99,6 +118,10 @@
 
   <!--Fin Section Instalaciones-->
 
+
+
+
+
+
     <script src="{{asset('js/index.js')}}"></script>
->>>>>>> landing
 @endsection

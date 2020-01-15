@@ -27,13 +27,41 @@ class StudentGroupController extends Controller
 
     //insertar un regustro al gupo_alumno
     public function create(Request $data){
+
         $data->user()->authorizeRoles('user');
-        $grupo_alumno = new StudentGroup;
-        $grupo_alumno -> user_id = $data -> input('id_student');
-        $grupo_alumno -> matter_user_id = $data -> input('id_group');
-        $grupo_alumno -> final_qualification = null;
-        $grupo_alumno -> save();
-        Session::flash('mensaje','CARGASTE UN GRUPO CORRECTAMENTE');
+
+
+        $alumno = auth()->user();
+        $visibles = [];
+        foreach ($alumno -> groups as $grupo) {
+            # code...
+            if ($grupo -> visibility == 1) {
+                # code...
+                $visibles[] = $grupo;
+            }
+        }
+        
+        if (count($visibles)) {
+            # code...
+            foreach ($visibles as $item) {
+                # code...
+                if ($item->matter->name_matter == $data -> input('materia')) {
+                    # code...
+                    Session::flash('error','ERROR, YA TIENES CARGADA ESA MATERIA');
+                }
+            }
+
+        }else{
+
+            $grupo_alumno = new StudentGroup;
+            $grupo_alumno -> user_id = $data -> input('id_student');
+            $grupo_alumno -> matter_user_id = $data -> input('id_group');
+            $grupo_alumno -> final_qualification = null;
+            $grupo_alumno -> save();
+            Session::flash('mensaje','CARGASTE UN GRUPO CORRECTAMENTE');
+        }
+        
+        
         return redirect('/cursos');
        
     }

@@ -10,7 +10,7 @@
             <form action="/desmatricular" method="POST">
                 {{ csrf_field() }}
                 <input id="id_student" name="id_student" type="hidden" value="{{$alumno->id}}">
-                <div class="card-deck" style = "width:350px";>
+                <div class="card-deck" style = "width:400px";>
                 <div class="card text-white mb-3 bg-primary">
                     <div class="card-header">{{$curso -> matter -> name_matter}} {{$curso -> group}}</div>
                         <div class="card-body text-white">

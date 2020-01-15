@@ -19,6 +19,15 @@
     </div>
 @endif
 
+@if(Session::has('error'))
+    <div class="col-md-12" >
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p class="text-center">{{Session::get('error')}}</p>
+        </div>
+    </div>
+@endif
+
     @if(isset($cursos))
              
             <div class="row d-flex justify-content-around mt-5">
@@ -53,6 +62,7 @@
                                 <h5 class="card-title">Descripción: {{$curso -> description}}</h5>
                                 <p class="card-text">Profesor: {{$curso -> user -> name}} {{$curso -> user -> surnames}}</p>
                                 </div>
+                                <input id="materia" name="materia" type="hidden" value="{{$curso -> matter -> name_matter}}">
                                 <input id="id_group" name="id_group" type="hidden" value="{{$curso->id}}">
                                 <input id="id_student" name="id_student" type="hidden" value="{{Auth::user()->id}}">
                                 <div class="card-footer">

@@ -11,6 +11,7 @@ class NewController extends Controller
     public function showNew(Request $data){
         $data->user()->authorizeRoles('admin');
         $noticias = News::all();
+        $data->session()->forget('alumno');
         return view('admin.new',['noticias'=> $noticias]);
     }
 

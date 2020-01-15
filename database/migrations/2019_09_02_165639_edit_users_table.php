@@ -46,7 +46,7 @@ class EditUsersTable extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('enrollment');
             $table->dropColumn('semester');
-            $table->dropColumn('enrollment');
+            $table->dropColumn('visibility');
         });
     }
 }

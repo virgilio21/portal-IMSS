@@ -18,7 +18,7 @@
         <div class="col-lg-3 col-md-6 col-12">
 
             <div class="card">
-            <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
+            <img src="{{asset('img/IMG_6034.JPG')}}" class="card-img-top" alt="face-perfil">
                 <div class="card-body">
                   <h5 class="card-title">Sacha Lifszyc</h5>
                   <span class="badge badge-primary">JavaScript</span>
@@ -32,7 +32,7 @@
             <div class="col-lg-3 col-md-6 col-12 mb-4">
 
               <div class="card">
-              <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
+              <img src="{{asset('img/IMG_6034.JPG')}}" class="card-img-top" alt="face-perfil">
                   <div class="card-body">
                     <h5 class="card-title">Sacha Lifszyc</h5>
                     <span class="badge badge-danger">Java</span>
@@ -47,7 +47,7 @@
               <div class="col-lg-3 col-md-6 col-12 mb-4">
 
                   <div class="card mb-4">
-                  <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
+                  <img src="{{asset('img/IMG_6034.JPG')}}" class="card-img-top" alt="face-perfil">
                       <div class="card-body">
                         <h5 class="card-title">Sacha Lifszyc</h5>
                         <span class="badge badge-light">Python</span>
@@ -62,7 +62,7 @@
                   <div class="col-lg-3 col-md-6 col-12 mb-4">
 
                       <div class="card">
-                      <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
+                      <img src="{{asset('img/IMG_6034.JPG')}}" class="card-img-top" alt="face-perfil">
                           <div class="card-body">
                             <h5 class="card-title">Sacha Lifszyc</h5>
                             <span class="badge badge-success">Bootstrap</span>

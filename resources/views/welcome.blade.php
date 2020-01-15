@@ -8,16 +8,16 @@
           <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block w-100" src="{{asset('img/IMG_6062.jpg')}}" alt="First slide">
+                  <img class="d-block w-100" src="{{asset('img/IMG_6062.JPG')}}" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100" src="{{asset('img/IMG_6044.jpg')}}" alt="Second slide">
+                  <img class="d-block w-100" src="{{asset('img/IMG_6044.JPG')}}" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100" src="{{asset('img/IMG_6058.jpg')}}" alt="Third slide">
+                  <img class="d-block w-100" src="{{asset('img/IMG_6058.JPG')}}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100" src="{{asset('img/IMG_6034.jpg')}}" alt="Third slide">
+                  <img class="d-block w-100" src="{{asset('img/IMG_6034.JPG')}}" alt="Third slide">
                 </div>
                 
                 <!--Overlay, es parecido a poner un fondo negro sobre el carrucel, es una clase que nosotros creamos-->

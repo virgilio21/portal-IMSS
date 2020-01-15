@@ -2,7 +2,8 @@
 
 
 @section('content')
-    
+
+<div class="container">
 <h2 class="text-center">{{$userName}} a contestado "{{$surveyName}}".</h2>
 
     <div class="row">
@@ -19,4 +20,5 @@
 
         </div>
     </div>
+</div>
 @endsection

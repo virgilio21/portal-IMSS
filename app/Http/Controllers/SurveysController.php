@@ -93,7 +93,6 @@ class SurveysController extends Controller
 
         $request->user()->authorizeRoles('admin');
         $survey = session('survey');
-        dd($request);
         Section::create([
             
             'name' => $request->input('nameSection'),

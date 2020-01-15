@@ -5,7 +5,7 @@
 @section('content')
     
     
-
+<div class="container">
     <h1 class="text-center">{{$survey->name}}</h1>
     
     <form action="/survey/send/answers" method="POST"> 
@@ -86,13 +86,14 @@
             <h4>Esta encuesta esta vacia.</h4>
         @else
             @if( Auth::user()->hasRole('teacher') or Auth::user()->hasRole('user') )
-                <button type="submit" class="btn btn-success mt-4">Guardar</button>
+                <button type="submit" class="btn btn-success mt-4 mb-3">Guardar</button>
             @else
                 <h5 class="mt-5 text-danger">No puedes contestar la encuesta esta vista es solo de previsualización.</h5>
             @endif
         
         @endif
     </form>
+</div>
      
 
     

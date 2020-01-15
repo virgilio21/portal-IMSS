@@ -2,6 +2,7 @@
 
 @section('content')
 
+<div class="container">
     <h1 class="text-center">Lista de encuestas disponibles</h1>
     <div class="row">
         @if(Session::has('mensaje'))
@@ -51,6 +52,7 @@
                 </div>
             @endif
         </div>
+</div>
 
     <script>
     

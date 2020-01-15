@@ -3,6 +3,7 @@
 
 @section('content')
     
+<div class="container">
     <h1 class="mb-4">Dashboard de encuestas.</h1>
     <div class="row">
         @if(Session::has('error'))
@@ -136,6 +137,7 @@
                 </div>
             @endif
         </div>
+</div>
 
         @include('layouts.deleteSurvey')
         <script src="{{ asset('js/passValueOfModal.js') }}" defer></script>

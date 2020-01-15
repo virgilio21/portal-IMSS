@@ -43,7 +43,7 @@
         <div class="col-12">
                 @foreach ($survey->sections as $section)
                     <h2 class="card-text">
-                        <a href="#" class="mb-4" data-toggle="modal" data-target="#create" onclick="recibirValue( 'sectionName','{{$section->id}}' );">{{$section->name}}</a>
+                        <a href="#" class="mb-4" data-toggle="modal" data-target="#create" onclick="recibirValue('sectionName','{{$section->id}}');">{{$section->name}}</a>
                     </h2>
                     <div class="text-muted card-text">
                         {{$section->created_at}}

@@ -2,7 +2,7 @@
 
 
 @section('content')
-
+<div class="container">
     <style>
     
     
@@ -97,5 +97,6 @@
     @endforeach
 
     <h5><a href="/users/list/" class="text-success">Ver lista de usuarios que contestaron.</a></h5>
+</div>
     
 @endsection

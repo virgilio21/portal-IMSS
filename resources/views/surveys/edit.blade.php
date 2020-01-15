@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class="container">
 <div class="row">
     @if(Session::has('error'))
     <div class="col-12" >
@@ -33,9 +34,9 @@
         <div class="col-12">
                 @foreach ($survey->sections as $section)
                     <h2 class="card-text">
-                    <a href="#" class="mb-4" data-toggle="modal" data-target="#editSection" onclick="recibirValue( 'nameSection','{{$section->name}}', 'sectionId', '{{$section->id}}');">{{$section->name}}</a>
+                    <a href="#" class="mb-4 mr-3" data-toggle="modal" data-target="#editSection" onclick="recibirValue( 'nameSection','{{$section->name}}', 'sectionId', '{{$section->id}}');">{{$section->name}}</a>
                     <a href="#" data-toggle="modal" data-target="#removeItem" onclick="recibirValue('itemId', '{{$section->id}}', 'itemType','section')">
-                    <i class="far fa-trash-alt text-danger">eli</i>
+                    <i class="far fa-trash-alt text-danger"></i>
                     </a>
                     </h2>
                     <div class="text-muted card-text">
@@ -45,11 +46,11 @@
                     @foreach ($section->questions as $question)
 
                         <p class="question">                           
-                        <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editQuestion" onclick="recibirValue('question', '{{$question->question}}', 'questionId', '{{$question->id}}' )">
+                        <a href="#" class="mb-4 mr-3" data-toggle="modal" data-target="#editQuestion" onclick="recibirValue('question', '{{$question->question}}', 'questionId', '{{$question->id}}' )">
                                     {{$loop->iteration}}. {{$question->question}}
                         </a>
-                        <a href="#" data-toggle="modal" data-target="#removeItem" >
-                            <i class="far fa-trash-alt text-success" onclick="recibirValue('itemId', '{{$question->id}}', 'itemType','question')">eli</i>
+                        <a href="#" data-toggle="modal" data-target="#removeItem">
+                            <i class="far fa-trash-alt text-success" onclick="recibirValue('itemId', '{{$question->id}}', 'itemType','question')"></i>
                         </a>
                         </p>
 
@@ -67,12 +68,12 @@
                             
                                     
                                     @else
-                                    <a href="#" class="mb-4 black" data-toggle="modal" data-target="#editAnswer" onclick="recibirValue('answer', '{{$answer->answer}}', 'answerId', '{{$answer->id}}' )">
+                                    <a href="#" class="mb-4 mr-3" data-toggle="modal" data-target="#editAnswer" onclick="recibirValue('answer', '{{$answer->answer}}', 'answerId', '{{$answer->id}}' )">
                                             {{$loop->iteration}}. {{$answer->answer}}
                                     </a>
 
                                     <a href="#" data-toggle="modal" data-target="#removeItem" onclick="recibirValue('itemId', '{{$answer->id}}', 'itemType','answer')">
-                                        <i class="far fa-trash-alt text-primary">eli</i>
+                                        <i class="far fa-trash-alt text-primary"></i>
                                     </a>
 
                                     @endif
@@ -92,6 +93,7 @@
             
         </div>
     </div>
+</div>
      
     
     

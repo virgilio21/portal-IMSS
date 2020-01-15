@@ -142,3 +142,46 @@ img.tamanio{
     height: 50vh !important;
     object-fit: cover !important;
 }
+
+div.responsivo{
+    justify-content: center;
+}
+
+/**************************IPAD******************/
+@media screen and (max-width:768px){
+    
+
+    div#cajasNoticias{
+        margin-bottom: 15px;
+    }
+
+    div.card > img{
+        height: 30vh !important;
+    }
+    
+    img.instalacion{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:414px){
+
+    div.borde-dashed{
+        border-right-width: 0 !important;
+        border-bottom-style: dashed !important;
+        border-bottom-width: 2px  !important;
+    }
+
+    div.borde-dashed2{
+        border-right-width: 0px  !important;
+        border-bottom-style: dashed !important;
+        border-bottom-width: 1px  !important;
+    }
+
+    div.movilFooter{
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    
+}

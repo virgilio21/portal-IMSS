@@ -10,7 +10,9 @@
     <title>Escuela de enfermería Mérida</title>
 
     <!-- Scripts -->
+    <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr'
 	 crossorigin='anonymous'>
@@ -21,6 +23,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/stylesVirgo.css') }}">
 
     <style>
         nav.navbar{
@@ -79,11 +82,20 @@
             table.buscador{
                 display: block !important;
             }
+
         }
 
         @media screen and (max-width:414px){
             table{
                 display: block !important;
+            }
+
+            .navbar-toggler{
+                border-color: white !important;
+            }
+
+            .navbar-toggler i{
+                color: white !important;
             }
         }
         
@@ -99,7 +111,7 @@
                     Home
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="fas fa-edit"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -128,6 +140,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link black" href="/noticias">Noticias</a>
                                 </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link black" href="/survey">Encuestas</a>
+                                </li>
                             @endif
 
 
@@ -135,6 +150,9 @@
                             @if (Auth::user()->hasRole('teacher'))
                                 <li class="nav-item">
                                     <a class="nav-link black" href="/asignaturas">Materias</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link black" href="/survey/list">Encuestas</a>
                                 </li>
                             @endif
 
@@ -159,6 +177,10 @@
                                         <a class="nav-link black" href="/historial">Historial</a>
                                     </li>
                                 @endif
+
+                                <li class="nav-item">
+                                    <a class="nav-link black" href="/survey/list">Encuestas</a>
+                                </li>
                             @endif
 
                         @else
@@ -179,9 +201,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link black" href="/#">Documentos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link black" href="/#">Programas</a>
                             </li>
                         @endif
 
@@ -235,18 +254,18 @@
         <div class="row componer text-center pt-3 pb-3">
             <div class="col-md-3 d-flex justify-content-center align-items-end borde-dashed2"><p>Copyright © ® 2019 
             Derechos reservados.</p></div>
-            <div class="col-md-3 borde-dashed2">
+            <div class="col-md-3 borde-dashed2 movilFooter">
                 <h5><strong>Acerca de nosotros</strong></h5> 
                 <p class="mb-1"><a class="pb-1 pt-1 blue" href="#" data-toggle="modal" data-target="#mision">Misión</a></p>
                 <p class="mb-1"><a href="#" class="pb-1 pt-1 blue" data-toggle="modal" data-target="#vision">Visión</a></p>
                 <p class="mb-1"><a href="#" class="pb-1 pt-1 blue" data-toggle="modal" data-target="#valores">Valores</a></p>
             </div>
-            <div class="col-md-3 borde-dashed2">
+            <div class="col-md-3 borde-dashed2 movilFooter">
                 <h5><strong>Contacto</strong></h5> 
                 <p class="mb-1">Tel: 9879015</p>
-                <p class="mb-1">Correo: Myrna.gamboa@imss.gob.mx</p>
+                <small class="mb-1">Correo: Myrna.gamboa@imss.gob.mx</small>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 movilFooter">
                 <h5><strong>Ayuda y dudas</strong></h5> 
                 <p class="mb-1"><a href="#" class="pb-2 pt-2 blue" data-toggle="modal" data-target="#ayuda">Consulta tu duda</a></p>
             </div>
@@ -346,8 +365,8 @@
         </div>
         <div class="modal-body">
 
-            <form method="POST" action="/nose aun">
-
+            <form method="POST" action="/formulario">
+                {{csrf_field()}}
                 <div class="form-group">
                     <label for="fullNmae">Nombre completo</label>
                     <input type="text" name="fullName" class="form-control" id="fullNmae" placeholder="Juan Barba Blanca">
@@ -366,15 +385,17 @@
                   
                 </div>
                 
-            </form>
-            <div class="alert alert-success" role="alert">
-                Se enviara un correo a tu cuenta con la respuesta.
-            </div>
+            
+                <div class="alert alert-success" role="alert">
+                    Se enviara un correo a tu cuenta con la respuesta.
+                </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary btn-my-color">Enviar</button>
+                
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <input type="submit" class="btn btn-primary btn-my-color" value="Enviar" />
+                </div>
+            </form>
         </div>
       </div>
     </div>

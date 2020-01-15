@@ -10,10 +10,19 @@
 |
 */
 
+Route::group(['middleware' => 'auth'], function(){
+
+    Route::get('/survey/list', 'SurveysController@listSurveys');
+    
+
+});
+
+
 Route::get('/', 'IndexController@welcome');
 Route::get('/index/profesores', 'IndexController@profesores');
 Route::get('/noticia/show/{id}','IndexController@noticia');
 Route::get('/noticias/all','IndexController@noticias');
+Route::post('/formulario','IndexController@formulario');
 
 Auth::routes();
 
@@ -91,6 +100,56 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/calificacion/{show}/{show2}','UnitController@subirCalificacion');
     Route::post('/subir','UnitController@actualizar');
     Route::post('/promedio/{id}/{id2}','UnitController@promedioAlumno');
+
+
+
+
+    //VIRGILIO RUTAS
+    Route::get('/survey', 'SurveysController@home');
+    Route::post('/survey/create', 'SurveysController@create');
+    
+    Route::get('/survey/{show}', 'SurveysController@show');
+    Route::post('/survey/section/create', 'SurveysController@createSection');
+    Route::post('/survey/question/create', 'SurveysController@createQuestion');
+    Route::post('/survey/answer/create', 'SurveysController@createAnswer');
+    Route::get('/survey/edit/{id}', 'SurveysController@editSurvey');
+
+
+    //Update survey
+   
+    Route::post('/survey/update/survey', 'SurveysController@updateSurvey');
+    Route::post('/survey/update/section', 'SurveysController@updateSection');
+    Route::post('/survey/update/question', 'SurveysController@updateQuestion');
+    Route::post('/survey/update/answer', 'SurveysController@updateAnswer');
+
+    //remove
+    
+    Route::post('/survey/remove/item', 'SurveysController@deleteItem');
+    Route::post('survey/delete/all', 'SurveysController@deleteSurvey');
+
+    //response answers users
+    
+    Route::get('/survey/response/{id}', 'SurveysController@showFormUsers');
+    Route::post('/survey/hidden/','SurveysController@hiddenSurvey');
+
+
+    //Logs
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+    
+
+    //Capture Answers
+    Route::post('/survey/send/answers', 'SurveysController@sendAnswers');
+
+
+    //View Results
+    Route::get('/survey/results/{id}', 'SurveysController@viewResults');
+
+    //Ver alumnos
+    Route::get('/users/list', 'SurveysController@listUsers');
+
+    Route::get('/answers/user/{id}', 'SurveysController@viewAnswersUser');
+    
 
 
 });

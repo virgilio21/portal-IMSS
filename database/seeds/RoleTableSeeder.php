@@ -30,9 +30,9 @@ class RoleTableSeeder extends Seeder
         $user = new User();
         $user -> name = "Alejandro";
         $user -> surnames = "Gonzalez";
-        $user -> enrollment = "E15080299";
+        $user -> enrollment = "E15080150";
         $user -> email = "administrador@gmail.com";
-        $user -> address = "uman";
+        $user -> address = "Domicilio conocido";
         $user -> password = Hash::make("administrador");
         $user -> phone = "999-999-9999";
         $user -> visibility = 1;

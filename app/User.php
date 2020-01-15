@@ -95,12 +95,19 @@ class User extends Authenticatable
     }
 
 
-
-
-
-
     public function grupoAlumno(){
         return $this->hasMany(StudentGroup::class);
     }
+
+    public function answers(){
+
+        return $this->belongsToMany(Answer::class);
+    }
+
+
+    public function surveys(){
+        return $this->belongsToMany(Survey::class)->withPivot('status');
+    }
+
 
 }

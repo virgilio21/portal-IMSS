@@ -73,9 +73,9 @@
     <h2 class="text-center mb-4">~ NOTICIAS ~</h2>
     <p class="text-center"><a href="/noticias/all" class="btn btn-danger">Ver todas las noticias</a></p>
     <div class="container">
-      <div class="row">
+      <div class="row responsivo">
       @foreach($noticias as $item)    
-        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-strech">
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-strech" id="cajasNoticias">
           <div class="card">
             <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
             <div class="card-body">

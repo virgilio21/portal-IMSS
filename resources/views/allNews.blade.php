@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{asset('css/index.css')}}">
+<link rel="stylesheet" href="{{asset('css/footer.css')}}">
+
 <div class="container mb-3">
     <div class="row">
-        @foreach($noticias as $item)
+        @forelse($noticias as $item)
             <div class="col-lg-4 col-md-6 col-12 mt-3 d-flex align-items-strech">
             <div class="card">
                 <img src="{{asset('img/IMG_6062.jpg')}}" class="card-img-top" alt="face-perfil">
@@ -15,7 +17,9 @@
                 </div>
             </div>
             </div>
-        @endforeach
+        @empty  
+            <h2 style="margin:Auto">No hay noticias disponibles</h2>
+        @endforelse
     </div>
     <br>
     <div class="row">

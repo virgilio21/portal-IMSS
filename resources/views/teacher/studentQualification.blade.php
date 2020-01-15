@@ -73,7 +73,7 @@
     </div>
 </form>
 
-<script src="{{asset('js/passValueOfModal.js')}}"></script>
+<script src="{{asset('js/passValueOfModal2.js')}}"></script>
 
 <form action="/subir" method="POST" >
     {{csrf_field()}}

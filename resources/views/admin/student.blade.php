@@ -144,7 +144,7 @@
  
 
 
-<script src="{{asset('js/passValueOfModal.js')}}"></script>
+<script src="{{asset('js/passValueOfModal2.js')}}"></script>
 
 <form action="/bajaUsuario" method="POST" >
     {{csrf_field()}}

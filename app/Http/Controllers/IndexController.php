@@ -29,4 +29,15 @@ class IndexController extends Controller
         return view('allNews',['noticias'=>$noticias]);
     }
 
+    public function formulario(Request $data){
+        $destino="Myrna.gamboa@imss.gob.mx";
+        $name = $data -> input('fullName');
+        $email = $data -> input('email');
+        $help = $data -> input('help');
+        $contenido="Nombre: ".$name."\nCorreo: ".$email."\nMensaje: ".$help;
+        mail($destino,"Contacto", $contenido);
+
+        return redirect('/');
+    }
+
 }

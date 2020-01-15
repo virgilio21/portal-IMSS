@@ -42,7 +42,7 @@
 
                     </div>
 					<div class="row align-items-center remember">
-						<input type="checkbox">Recordarme
+						<input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Recordarme
 					</div>
 					<div class="form-group">
 						<input type="submit" value="Iniciar" class="btn float-right login_btn">

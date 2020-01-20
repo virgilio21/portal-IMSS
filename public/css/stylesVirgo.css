@@ -33,6 +33,20 @@ input.radio{
     display:block;
 }
 
+img.error{
+    
+    width: 100% !important;
+    height:80vh;
+}
+figure{
+    padding: 0;
+    margin: 0;
+}
+div#errorContenedor{
+    padding: 0;
+}
+
+
 @media screen and (max-width:414px){
 
     textarea.movil{

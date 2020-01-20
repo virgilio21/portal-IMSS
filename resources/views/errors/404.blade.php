@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">Lo siento no encontramos lo que buscabas Error 404 :c</h1>    
+
+
+    <div class="container-fluid" id="errorContenedor">
+
+        <figure id="f-404">
+
+
+            <img class="error" src="{{asset('img/error-3689676_1920.jpg')}}" alt="imagen de error 404">
+        </figure>
+
+
+    </div>
+
 @endsection

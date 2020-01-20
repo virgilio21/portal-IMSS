@@ -8,7 +8,7 @@
         <figure id="f-404">
 
 
-            <img class="error" src="{{asset('img/401.jpg')}}" alt="imagen de error 404">
+            <img class="error" src="{{asset('img/500.png')}}" alt="imagen de error 404">
         </figure>
 
 

@@ -77,7 +77,7 @@
       @foreach($noticias as $item)    
         <div class="col-lg-4 col-md-6 col-12 d-flex align-items-strech" id="cajasNoticias">
           <div class="card">
-            <img src="{{asset('img/IMG_6034.jpg')}}" class="card-img-top" alt="face-perfil">
+            <img src="{{asset('img/IMG_6034.JPG')}}" class="card-img-top" alt="face-perfil">
             <div class="card-body">
               <h5 class="card-title text-center">{{$item->title}}</h5>
               <div class="d-flex justify-content-around align-items-center">
@@ -101,16 +101,16 @@
       <h2 class="text-center mb-4">~ INSTALACIONES ~</h2>
       <div class="row componer text-center">
         <div class="col-md-6">
-          <img src="{{asset('img/IMG_6035.jpg')}}" alt="" class="instalacion mb-3">
+          <img src="{{asset('img/IMG_6035.JPG')}}" alt="" class="instalacion mb-3">
         </div>
         <div class="col-md-6">
-          <img src="{{asset('img/IMG_6040.jpg')}}" alt="" class="instalacion mb-3">
+          <img src="{{asset('img/IMG_6040.JPG')}}" alt="" class="instalacion mb-3">
         </div>
         <div class="col-md-6">
-          <img src="{{asset('img/IMG_6042.jpg')}}" alt="" class="instalacion mb-3">
+          <img src="{{asset('img/IMG_6042.JPG')}}" alt="" class="instalacion mb-3">
         </div>
         <div class="col-md-6">
-          <img src="{{asset('img/IMG_6066.jpg')}}" alt="" class="instalacion mb-3">
+          <img src="{{asset('img/IMG_6066.JPG')}}" alt="" class="instalacion mb-3">
         </div>
       </div>
     </div>
